@@ -53,11 +53,13 @@ Aplikasi ini dikembangkan dengan fokus pada:
 
 ## 📆 Roadmap Pengembangan
 
+- [x] Design Thinking
+- [x] UI Designing
 - [x] Setup proyek Flutter & Firebase
-- [x] Integrasi Chatbot AI
-- [x] Desain & implementasi mood tracker
-- [x] Penulisan & review konten artikel edukatif
-- [x] Sistem notifikasi
+- [ ] Integrasi Chatbot AI
+- [ ] Desain & implementasi mood tracker
+- [ ] Penulisan & review konten artikel edukatif
+- [ ] Sistem notifikasi
 - [ ] Penambahan fitur eskalasi otomatis ke ULTKSP
 - [ ] Penyesuaian UI/UX hasil beta testing
 
