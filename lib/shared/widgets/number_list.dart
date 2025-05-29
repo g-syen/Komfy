@@ -33,8 +33,9 @@ class NumberList extends StatelessWidget {
                   "$str",
                   textAlign: TextAlign.left,
                   softWrap: true,
-                  style: GoogleFonts.inter(
+                  style: GoogleFonts.josefinSans(
                     fontSize: 15,
+                    fontWeight: FontWeight.normal,
                     color: Colors.black,
                     height: 1.55,
                   ),

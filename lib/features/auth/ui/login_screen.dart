@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await encryptionService.savePrivateKeyLocally(privatePem);
     }
     if (!mounted) return;
-    Navigator.pushReplacementNamed(context, '/home');
+    Navigator.pushReplacementNamed(context, '/navbar');
   }
 
   Future<void> _login() async {
@@ -135,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           }
                         } catch (e) {
-                          print('Error resending email: $e');
+                          log('Error resending email: $e');
                         }
                       },
                       child: Text('Resend'),

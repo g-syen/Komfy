@@ -1,6 +1,7 @@
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -43,10 +44,10 @@ class ChatService {
           return topic;
         }
       } else {
-        print('Document does not exist');
+        log('Document does not exist');
       }
     } catch (e) {
-      print('Error getting document: $e');
+      log('Error getting document: $e');
     }
 
     return '';
@@ -72,9 +73,9 @@ class ChatService {
           .doc(chatRoomId)
           .delete();
 
-      print('Chat room and messages deleted successfully.');
+      log('Chat room and messages deleted successfully.');
     } catch (e) {
-      print('Error deleting chat room: $e');
+      log('Error deleting chat room: $e');
     }
   }
 
