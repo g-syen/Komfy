@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "195304469833",
+    "project_id": "komfy-ae3a8",
+    "storage_bucket": "komfy-ae3a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195304469833:android:933366e6c5d654b8941698",
+        "android_client_info": {
+          "package_name": "com.example.komfy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195304469833-4lgv1pjtt9ee8fhth7f2kudqblcal6j4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.komfy",
+            "certificate_hash": "a9fec15173df1db5aee9a9ef760a539e24a820e7"
+          }
+        },
+        {
+          "client_id": "195304469833-frml2gtfunv6s5ad2pjgkcn1hf8d380b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0-AKwXxu_sy2QA9bLH3vSPzZ34uRIq2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195304469833-frml2gtfunv6s5ad2pjgkcn1hf8d380b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "195304469833-gdddbth6is5gb1oup3rcg177cenp1m51.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.komfy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
