@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'encryption_services.dart';
+import '../../../shared/services/encryption_services.dart';
 import 'package:http/http.dart' as http;
 
 class GoogleGeminiService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final EncryptionServices _encryptionServices = EncryptionServices();
 
   Future<Map<String, String>?> sendMessage({
     required String message,
@@ -14,8 +13,25 @@ class GoogleGeminiService {
     required bool isFirstMessage,
     String? existingChatRoomID,
   }) async {
-    final workerUrl = 'https://gemini-vercel-1gadwt7ds-gosyens-projects.vercel.app/api/gemini';
-
+    final workerUrl = 'https://gemini-vercel-6tfp92hps-gosyens-projects.vercel.app/api/gemini';
+    final pem = """
+-----BEGIN PUBLIC KEY-----
+MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA4+lqkwrZa9+gZhojBYJs
+ZWqJne3P3Jm+U2Ysqlm0zib8nGO7FdvwEkBb6p2e6eGPJhZr9L5dCgsAqLKiiNvg
+YTSAcpA901a0M+RZ1chL03319JWHD3Sfb6vV3StDv+nvRcd4JWhaDsKZwf80WXw1
+jzja5ZNJU5szsFOjkrIFfMztpu6peQEB+85AxTq4akrI4Ik0NWOO1qEe3y4rv3B6
+pzg14EBk/Ur4zmYXVzpuXZ7WU/953YujQBIqxmaU/FTsBEL2CQWC4mHAW51g48mh
+EjmE4r9S+2FachKLYsh3YAgE8XwaNyFBwnMp60jILOCAtYpdUetTpsgAE8OY4AWO
+D8HGmIQrEMvTLtbnjGqTDmf+kPmEmvhLm0UMz1omWtHTsFM+b8isTQ0oG/a8VWBA
+e141dO4VjI0Q6TTNOoi8fYktHAcn3iOWRBuGKLYKgI/ALO8lxG9VG4XxfJ1zX2PE
+5dpwr7flC1DG+s2wtJlvx85sO2jgncWU1E2Cw6NjJAQUUia/Bn5OxcZ6WB0uasPd
+b1LU7q1KuHYgIhgEHSfKZqPaybOH1jPmGLIMuDM0Tw6GmnIeffIXNX+IOEcxk67M
+5gyNrCM/F0rtGhsZsLwytdgJJaiv+dEE2KROaBAcU+gN1nnm6dHf6BXyNXud+ptS
+y2E8UvO4ApI0RGG60VDDGx8CAwEAAQ==
+-----END PUBLIC KEY-----
+""";
+    final publicKey = await parsePublicKeyFromPem(pem);
+    final encryptedMessage = rsaEncryptSingleBlock(message, publicKey);
     List<Map<String, dynamic>> chatHistory = [];
     if (!isFirstMessage && existingChatRoomID != null) {
       chatHistory = await _getLastMessages(existingChatRoomID, 15);
@@ -29,11 +45,11 @@ class GoogleGeminiService {
           throw Exception('Invalid message format: $encrypted');
         }
 
-        final decrypted = await _encryptionServices.decryptMessage(encrypted);
-
+        final decrypted = await rsaDecryptSingleBlock(encrypted);
+        final encryptedWithVercelKey = rsaEncryptSingleBlock(decrypted, publicKey);
         return {
           'senderID': msg['senderID'],
-          'message': decrypted,
+          'message': encryptedWithVercelKey,
           'timestamp': (msg['timestamp'] is Timestamp)
               ? (msg['timestamp'] as Timestamp).toDate().toIso8601String()
               : msg['timestamp']
@@ -46,14 +62,12 @@ class GoogleGeminiService {
 
 
     final String body = jsonEncode({
-      'userMessage': message,
+      'userMessage': encryptedMessage,
       'currentUserID': currentUserID,
       'existingChatRoomID': existingChatRoomID,
       'isFirstMessage': isFirstMessage,
       'chatHistory': serializedChatHistory,
     });
-
-    log('Serialized chat history: ${jsonEncode(serializedChatHistory)}');
 
     final response = await http.post(
       Uri.parse(workerUrl),
@@ -62,8 +76,15 @@ class GoogleGeminiService {
     );
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final fullText = data['candidates'][0]['content']['parts'][0]['text'];
+      Map<String, dynamic> fullGeminiResponseMap = jsonDecode(response.body);
+      Map<String, dynamic> encryptedPayloadMap;
+      try {
+        encryptedPayloadMap = fullGeminiResponseMap['candidates'][0]['content']['parts'][0]['text'];
+      } catch (e) {
+        print("Error extracting encrypted payload from Gemini response: $e");
+        throw Exception(e);
+      }
+      final fullText = await decryptHybridResponseFromServer(encryptedPayloadMap);
 
       final String topic = _extractTag(fullText, 'topic');
       final String geminiReply = _extractTag(fullText, 'response');

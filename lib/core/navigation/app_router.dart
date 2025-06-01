@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:komfy/features/auth/ui/complete_profile.dart';
+import 'package:komfy/features/profile/ui/komfy_badge_screen.dart';
 import 'package:komfy/features/komynfo/ui/article_content_screen.dart';
 import 'package:komfy/features/komynfo/ui/video_content_screen.dart';
 import 'package:komfy/features/onboarding/onboarding_screen.dart';
+import 'package:komfy/features/profile/ui/faq_screen.dart';
+import 'package:komfy/shared/widgets/navbar.dart';
 import 'package:komfy/shared/widgets/navbar.dart';
 import 'package:komfy/features/auth/ui/login_screen.dart';
 import 'package:komfy/features/auth/ui/register_screen.dart';
@@ -34,7 +38,12 @@ Map<String, WidgetBuilder> appRoutes = {
   '/komynfo': (context) => KomynfoScreen(),
   '/komynfo_article': (context) => ArticleContentScreen(),
   '/komynfo_video': (context) => VideoContentScreen(),
-  '/profile': (_) => const Profile(),
+  '/profile': (context) => const ProfileScreen(),
+  '/settings': (context) => SettingsScreen(),
+  '/change_password': (context) => ChangePasswordScreen(),
+  '/faq': (context) => FaqScreen(),
+  '/edit_profile': (context) => EditProfileScreen(),
+  '/komfy_badge': (context) => KomfyBadgeScreen()
 };
 
 Route<dynamic> generateRoute(RouteSettings settings) {

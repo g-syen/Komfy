@@ -1,11 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:komfy/shared/widgets/custom_button.dart';
-
+import '../../../shared/services/encryption_services.dart';
 import '../../../shared/widgets/custom_textfield.dart';
+import '../../../themes/typography.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -17,27 +19,48 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final _emailController = TextEditingController();
+  final _nimController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final List<String> allowedDomains = ['ub.ac.id', 'student.ub.ac.id'];
+  final String allowedDomains = 'student.ub.ac.id';
+  final _auth = FirebaseAuth.instance;
   bool _obscurePassword = true;
   bool _isLoading = false;
   String? _error;
 
   Future<void> _register() async {
     final email = _emailController.text.trim();
+    final nim = _nimController.text.trim();
+    final password = _passwordController.text.trim();
+    final confirmPassword = _confirmPasswordController.text.trim();
+
+    if(email.isEmpty || nim.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      setState(() {
+        _error = 'Pastikan semua data sudah terisi.';
+      });
+      return;
+    }
+
     final domain = email.split('@').last;
+    final fakultas = nim.substring(3, 6);
 
     if (!allowedDomains.contains(domain)) {
       setState(() {
-        _error = 'Only @${allowedDomains.join(" and @")} emails are allowed.';
+        _error = 'Hanya email @$allowedDomains yang diperbolehkan.';
+      });
+      return;
+    }
+
+    if(!fakultas.contains('150')){
+      setState(() {
+        _error = 'Maaf, untuk saat ini aplikasi hanya dapat digunakan Mahasiswa FILKOM UB';
       });
       return;
     }
 
     if (_confirmPasswordController.text!=_passwordController.text){
       setState(() {
-        _error = 'Passwords do not match. Please check again.';
+        _error = 'Kedua password tidak sama. Tolong periksa kembali.';
       });
       return;
     }
@@ -48,42 +71,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
-        password: _passwordController.text.trim(),
+        password: password,
       );
 
-      await userCredential.user?.sendEmailVerification();
+      List<dynamic> keyList= await generateUserKeyPairs(userCredential.user!.uid, password);
+      String publicKey = keyList[0];
+      String base64EncryptedPrivateKey = base64Encode(keyList[1]);
+      String iv = base64Encode(keyList[2]);
+      String salt = base64Encode(keyList[3]);
 
       final data = {
+        'nim': nim,
         'email': email,
-        'name': "",
+        'publicKey' : publicKey,
+        'encryptedPrivateKey': base64EncryptedPrivateKey,
+        'iv': iv,
+        'salt': salt,
         'role': 'user',
-        'photoProfile': '',
-        'public-key' : ''
       };
+
       _firestore.collection("Users").doc(userCredential.user!.uid).set(data);
 
-      if (mounted) {
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: Text('Verify Your Email'),
-            content: Text(
-              'We’ve sent a verification email to $email. '
-                  'Please verify your email before logging in.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, '/login');
-                },
-                child: Text('OK'),
-              ),
-            ],
-          ),
-        );
+      if(mounted) {
+        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, '/complete_profile');
       }
     } on FirebaseAuthException catch (e) {
       log('Register error code: ${e.code}');
@@ -122,16 +135,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Text(
                 'Komfy',
-                style: GoogleFonts.josefinSans(
-                  color: Color(0xFF142553),
-                  fontSize: 50,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTypography.title1.copyWith(color: Color(0xFF142553)),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                width: 165,
-                height: 165,
+                width: MediaQuery.of(context).size.width * 0.15,
+                height: MediaQuery.of(context).size.width * 0.15,
                 child: Image.asset(
                   'assets/images/komfy_logo.png',
                   fit: BoxFit.contain,
@@ -152,10 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         'Email',
                         textAlign: TextAlign.left,
-                        style: GoogleFonts.josefinSans(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: AppTypography.subtitle4,
                       ),
                       CustomTextField(
                         textFieldController: _emailController,
@@ -163,12 +169,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       SizedBox(height: 16.0,),
                       Text(
+                        'NIM',
+                        textAlign: TextAlign.left,
+                        style: AppTypography.subtitle4,
+                      ),
+                      CustomTextField(
+                        textFieldController: _nimController,
+                        hintText: 'Masukkan NIM',
+                      ),
+                      SizedBox(height: 16.0,),
+                      Text(
                         'Password',
                         textAlign: TextAlign.left,
-                        style: GoogleFonts.josefinSans(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: AppTypography.subtitle4,
                       ),
                       CustomTextField(
                         textFieldController: _passwordController,
@@ -189,10 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         'Confirm Password',
                         textAlign: TextAlign.left,
-                        style: GoogleFonts.josefinSans(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: AppTypography.subtitle4,
                       ),
                       CustomTextField(
                         textFieldController: _confirmPasswordController,
@@ -219,8 +229,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   : Padding(
                 padding: EdgeInsets.fromLTRB(16.0,0,16.0,0),
                 child: CustomButton(
-                  onPressed: _register,
-                  text: 'Create Account'
+                    onPressed: _register,
+                    text: 'Buat Akun'
                 ),
               ),
 
@@ -233,7 +243,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Divider(
                       color: Colors.grey,
                       thickness: 1,
-                      endIndent: 10, // space after the line
+                      endIndent: 10,
                     ),
                   ),
                   Text(

@@ -10,6 +10,7 @@ import 'package:komfy/shared/screens/splash_screen.dart';
 
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final ValueNotifier<bool> drawerStateNotifier = ValueNotifier<bool>(false);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,6 @@ class KomfyApp extends StatefulWidget {
 }
 
 class _KomfyAppState extends State<KomfyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -36,7 +36,12 @@ class _KomfyAppState extends State<KomfyApp> {
     log("Checking onboarding and login status...");
     final prefs = await SharedPreferences.getInstance();
     final hasSeen = prefs.getBool('seenOnBoardingScreen') ?? false;
-    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+    final bool isLoggedIn;
+    if (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) {
+      isLoggedIn = true;
+    } else {
+      isLoggedIn = false;
+    }
 
     log("hasSeen: $hasSeen, isLoggedIn: $isLoggedIn");
 
