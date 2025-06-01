@@ -1,19 +1,45 @@
+<<<<<<< Updated upstream
+=======
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:typed_data' as typed;
+>>>>>>> Stashed changes
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:pointycastle/asymmetric/api.dart';
 import '../../../shared/widgets/calendar.dart';
 import '../services/geminiai_service.dart';
 import '../model/message_model.dart';
-import '../services/encryption_services.dart';
+import '../../../shared/services/encryption_services.dart';
 
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleGeminiService _geminiService = GoogleGeminiService();
-  final EncryptionServices _encryptionServices = EncryptionServices();
+
+  Future<String> getUsername() async {
+    String currentUserID = _auth.currentUser!.uid;
+    DocumentSnapshot doc = await _firestore.collection("Users").doc(currentUserID).get();
+    if (doc.exists && doc.data() != null) {
+      return (doc.data() as Map<String, dynamic>)['namaPanggilan'] ?? 'Kawan Kommate';
+    } else {
+      return 'Kawan Kommate';
+    }
+  }
+
+  Future<String> fetchBadge() async {
+    String currentUserID = _auth.currentUser!.uid;
+    DocumentSnapshot doc = await _firestore.collection("Users").doc(currentUserID).get();
+    if (doc.exists && doc.data() != null) {
+      return (doc.data() as Map<String, dynamic>)['komfyBadge'] ?? 'None';
+    } else {
+      return 'None';
+    }
+  }
 
   Future<bool> hasChatHistory(String userID) async {
     final querySnapshot =
@@ -895,22 +921,34 @@ class ChatService {
 
   Future<void> saveUserMessage(String message, String existingChatRoomID) async {
     final String currentUserID = _auth.currentUser!.uid;
-
-    final encryptedMessage = await _encryptionServices.encryptMessageForUser(
-      currentUserID,
-      message,
-      _firestore,
-    );
-
-    await saveToFirestore(encryptedMessage!, existingChatRoomID, currentUserID);
+    final docSnapshot = await _firestore.collection("Users").doc(currentUserID).get();
+    if(docSnapshot.exists) {
+      final String? publicKeyString = docSnapshot.data()?['publicKey'];
+      final RSAPublicKey? publicKey = deserializePublicKeyFromJsonBase64(publicKeyString!);
+      log(publicKey!.modulus.toString(), name: 'Public Key');
+      final String encryptedMessage = rsaEncryptSingleBlock(message, publicKey);
+      await saveToFirestore(encryptedMessage, existingChatRoomID, currentUserID);
+    }
   }
 
+  Future<void> saveAutomatedMessage(String message, String existingChatRoomID) async {
+    final String currentUserID = _auth.currentUser!.uid;
+    final docSnapshot = await _firestore.collection("Users").doc(currentUserID).get();
+    if(docSnapshot.exists) {
+      final String? publicKeyString = docSnapshot.data()?['publicKey'];
+      final RSAPublicKey? publicKey = deserializePublicKeyFromJsonBase64(publicKeyString!);
+      log(publicKey!.modulus.toString(), name: 'Public Key');
+      final String encryptedMessage = rsaEncryptSingleBlock(message, publicKey);
+      await saveToFirestore(encryptedMessage, existingChatRoomID, 'gemini');
+    }
+  }
 
   Future<Map<String, dynamic>> sendMessage(
     String message, {
     bool isFirstMessage = false,
     existingChatRoomID,
   }) async {
+    final String currentUserID = _auth.currentUser!.uid;
     final result = await _getGeminiResponse(
       message,
       isFirstMessage: isFirstMessage,
@@ -925,13 +963,13 @@ class ChatService {
       "date": Timestamp.now(),
     });
 
-    final encryptedMessage = await _encryptionServices.encryptMessageForUser(
-      _auth.currentUser!.uid,
-      response,
-      _firestore,
-    );
-
-    saveToFirestore(encryptedMessage!, existingChatRoomID, 'gemini');
+    final docSnapshot = await _firestore.collection("Users").doc(currentUserID).get();
+    if(docSnapshot.exists) {
+      final String? publicKeyString = docSnapshot.data()?['publicKey'];
+      final RSAPublicKey? publicKey = deserializePublicKeyFromJsonBase64(publicKeyString!);
+      final String encryptedMessage = rsaEncryptSingleBlock(response, publicKey!);
+      await saveToFirestore(encryptedMessage, existingChatRoomID, 'gemini');
+    }
 
     return {'warning': warning ?? 'safe'};
   }

@@ -10,72 +10,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a18df75d-920d-4b8e-af7f-c9f18fb0dec9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/core/navigation/app_router.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/services/encryption_service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/ui/login_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/ui/register_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/kommate/model/message_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/kommate/services/chat_service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/kommate/services/encryption_services.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/kommate/services/geminiai_service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/kommate/ui/kommate_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/icons/my_icons.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/calendar.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/chat_bubble.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/custom_button.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/custom_textfield.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/number_list.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/themes/dark_mode.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/themes/light_mode.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/ui/complete_profile.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/profile/services/profile_services.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/change_password.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/edit_profile_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/faq_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/komfy_badge_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/profile_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/settings_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/shared/models/user_data.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/shared/services/encryption_services.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/shared/services/komfy_badge.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/alert_dialog.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/dropdown.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/splash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/splash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-v21/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-v21/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-v21/launch_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/splash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/splash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/splash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-night-v31/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values-night-v31/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-v31/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values-v31/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/komfy_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/komfy_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/darkbackground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/komfy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/komfy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/homepage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/home/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/loginpage.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/navigation/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/navigation/app_router.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/auth/services/encryption_service.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/auth/ui/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/auth/ui/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/auth/ui/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/auth/ui/register_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/kommate/model/message_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/model/message_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/kommate/services/chat_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/services/chat_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/kommate/services/encryption_services.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/kommate/services/geminiai_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/services/geminiai_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/kommate/ui/kommate_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/ui/kommate_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/profile.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lib/features/auth/services/encryption_service.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/onboarding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/onboarding/onboarding_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shared/widgets/custom_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/widgets/custom_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shared/widgets/navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/widgets/navbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shared/widgets/number_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/widgets/number_list.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/dark-1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/dark-2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/dark-3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/dark-4x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/light-1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/light-2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/light-3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/light-4x.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +101,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -159,40 +131,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Gosyen's&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ASUS/AndroidStudioProjects/Komfy/android/app/src/main/res/drawable&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Variables&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Flutter.main.dart.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Cindy",
+    "ignore.virus.scanning.warn.message": "true",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ASUS/AndroidStudioProjects/Komfy/lib/features/profile/ui",
+    "project.structure.last.edited": "Variables",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\features\profile\ui" />
       <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\android\app\src\main\res\drawable" />
       <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\features\profile\ui" />
       <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\features\auth\ui" />
       <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\shared\icons" />
       <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\features\kommate\model" />
       <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\features\kommate\services" />
-      <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\features\kommate\ui" />
     </key>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
