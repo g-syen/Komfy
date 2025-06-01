@@ -19,7 +19,7 @@ class MoodSelector extends StatelessWidget {
     final double cardSize = screenWidth * 0.15;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 10, bottom: 5),
+      padding: const EdgeInsets.only(top: 8, bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(moodEmojis.length, (index) {

@@ -69,7 +69,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
         Navigator.pushNamed(context, '/mood_input');
         break;
       case 2:
-        _showComingSoon("Halaman Komynfo");
+        Navigator.pushNamed(context, '/komynfo_navbar');
         break;
       case 3:
         _showComingSoon("Halaman Komfy Badge");
@@ -85,7 +85,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
           itemCount: curhatTexts.length,
           itemBuilder: (context, index, realIndex) {
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
               child: GestureDetector(
                 onTap: () => _handleTap(index),
                 child: Stack(
@@ -181,7 +181,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                         ),
                         child: Text(
                           _getFeatureName(index),
-                          style: AppTypography.bodyText2.copyWith(
+                          style: AppTypography.bodyText4.copyWith(
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic,
                             color: const Color(0xFF142553),

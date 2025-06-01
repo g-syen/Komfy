@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:komfy/features/komynfo/ui/article_content_screen.dart';
+import 'package:komfy/features/komynfo/ui/video_content_screen.dart';
 import 'package:komfy/features/onboarding/onboarding_screen.dart';
 import 'package:komfy/shared/widgets/navbar.dart';
 import 'package:komfy/features/auth/ui/login_screen.dart';
 import 'package:komfy/features/auth/ui/register_screen.dart';
 import 'package:komfy/features/home/home_screen.dart';
 import 'package:komfy/features/kommate/ui/kommate_screen.dart';
-import 'package:komfy/features/moodtracker/mood_recap_screen.dart';
-import 'package:komfy/features/moodtracker/mood_input_screen.dart';
-import 'package:komfy/features/moodtracker/mood_input_screen2.dart';
-import 'package:komfy/features/moodtracker/mood_input_screen3.dart';
-import 'package:komfy/features/moodtracker/mood_story_screen.dart';
-import 'package:komfy/features/moodtracker/model/mood_session_model.dart';
+import 'package:komfy/features/komfess/ui/mood_recap_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen2.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen3.dart';
+import 'package:komfy/features/komfess/ui/mood_story_screen.dart';
+import 'package:komfy/features/komfess/model/mood_session_model.dart';
 import 'package:komfy/features/profile.dart';
+import 'package:komfy/shared/widgets/komynfo_navbar.dart';
+import 'package:komfy/features/komynfo/ui/komynfo_screen.dart';
+import 'package:komfy/features/komynfo/ui/article_detail_screen.dart';
+import 'package:komfy/features/komynfo/ui/video_detail_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_detail_screen.dart';
 
 Map<String, WidgetBuilder> appRoutes = {
   '/onboarding': (context) => OnBoardingScreen(),
+  '/navbar': (context) => const NavBar(),
   '/login': (context) => const LoginScreen(),
   '/register': (context) => const RegisterScreen(),
-  // '/forgetpassword': (context) => ForgetpasswordScreen(),
+    // '/forgetpassword': (context) => ForgetpasswordScreen(),
   '/home': (context) => const HomeScreen(),
   '/kommate': (context) => KommateScreen(),
   '/komfess': (context) => const MoodRecapScreen(),
-  '/navbar': (context) => const NavBar(),
   '/mood_input': (context) => MoodInputScreen(),
+  '/komynfo_navbar': (context) => const KomynfoNavbar(),
+  '/komynfo': (context) => KomynfoScreen(),
+  '/komynfo_article': (context) => ArticleContentScreen(),
+  '/komynfo_video': (context) => VideoContentScreen(),
   '/profile': (_) => const Profile(),
 };
 
@@ -63,6 +74,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           moodSession: moodSession,
           currentStep: currentStep,
         ),
+      );
+    case '/mood_detail':
+      final documentId = settings.arguments as String;
+      return MaterialPageRoute(
+        builder: (_) => MoodDetailScreen(documentId: documentId),
+      );
+    case '/articleDetail':
+      return MaterialPageRoute(
+        builder: (_) => const ArticleDetailScreen(),
+        settings: settings,
+      );
+    case '/videoDetail':
+      return MaterialPageRoute(
+        builder: (_) => const VideoDetailScreen(),
+        settings: settings,
       );
     default:
       if (appRoutes.containsKey(settings.name)) {
