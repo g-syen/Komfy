@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:komfy/shared/widgets/navbar.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:komfy/features/komfess/model/mood_session_model.dart';
@@ -106,7 +107,7 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
               TextSpan(text: 'Simpan '),
               TextSpan(
                 text: 'Mood Tracker',
-                style: AppTypography.subtitle3.copyWith(
+                style: AppTypography.subtitle4.copyWith(
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
                 ),
@@ -199,7 +200,13 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Mood berhasil disimpan!')),
         );
-        Navigator.pushNamed(context, '/komfess');
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NavBar(initialIndex: 2), // Index 2 = Komfess
+          ),
+          (route) => false,
+        );
       }
     } catch (e) {
       if (mounted) {
