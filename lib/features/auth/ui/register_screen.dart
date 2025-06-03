@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
-=======
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
->>>>>>> Stashed changes
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -102,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Navigator.pushReplacementNamed(context, '/complete_profile');
       }
     } on FirebaseAuthException catch (e) {
-      print('Register error code: ${e.code}');
+      log('Register error code: ${e.code}');
       setState(() {
         _error = _friendlyErrorMessage(e.code);
       });

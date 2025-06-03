@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
@@ -5,6 +6,8 @@ import 'package:komfy/themes/light_mode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:komfy/core/navigation/app_router.dart';
+import 'package:komfy/shared/screens/splash_screen.dart';
+
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final ValueNotifier<bool> drawerStateNotifier = ValueNotifier<bool>(false);
@@ -30,7 +33,7 @@ class _KomfyAppState extends State<KomfyApp> {
   }
 
   Future<void> _navigateBasedOnState() async {
-    print("Checking onboarding and login status...");
+    log("Checking onboarding and login status...");
     final prefs = await SharedPreferences.getInstance();
     final hasSeen = prefs.getBool('seenOnBoardingScreen') ?? false;
     final bool isLoggedIn;
@@ -40,14 +43,14 @@ class _KomfyAppState extends State<KomfyApp> {
       isLoggedIn = false;
     }
 
-    print("hasSeen: $hasSeen, isLoggedIn: $isLoggedIn");
+    log("hasSeen: $hasSeen, isLoggedIn: $isLoggedIn");
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final route = hasSeen
-          ? (isLoggedIn ? '/home' : '/login')
+          ? (isLoggedIn ? '/navbar' : '/login')
           : '/onboarding';
 
-      print("Navigating to: $route");
+      log("Navigating to: $route");
       navigatorKey.currentState?.pushReplacementNamed(route);
     });
   }
@@ -61,12 +64,9 @@ class _KomfyAppState extends State<KomfyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Komfy',
         theme: lightMode,
-        routes: appRoutes,
-        home: const Scaffold(
-          body: Center(child: CircularProgressIndicator()),
-        ),
+        onGenerateRoute: generateRoute,
+        home: const SplashScreen(),
       ),
     );
   }
 }
-

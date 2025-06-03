@@ -79,32 +79,6 @@ class NumberList extends StatelessWidget {
             strings.asMap().entries.map((entry) {
               int index = entry.key + 1; // Start from 1
               String str = entry.value;
-<<<<<<< Updated upstream
-
-<<<<<<< Updated upstream
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "$index.",
-                style: TextStyle(
-                  fontSize: 16,
-                  height: 1.55,
-                ),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  "$str",
-                  textAlign: TextAlign.left,
-                  softWrap: true,
-                  style: GoogleFonts.inter(
-                    fontSize: 15,
-                    color: Colors.black,
-                    height: 1.55,
-=======
-=======
->>>>>>> Stashed changes
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
