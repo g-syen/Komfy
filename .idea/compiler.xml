@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="android.flutter_keyboard_visibility" target="21" />
+      <module name="android.flutter_native_splash" target="21" />
       <module name="android.flutter_secure_storage" target="21" />
       <module name="android.fluttertoast" target="21" />
       <module name="io.flutter.plugins.firebase.auth.android.firebase_auth" target="21" />

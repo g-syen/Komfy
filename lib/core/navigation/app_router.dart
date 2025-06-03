@@ -12,6 +12,7 @@ import 'package:komfy/features/auth/ui/register_screen.dart';
 import 'package:komfy/features/home/home_screen.dart';
 import 'package:komfy/features/kommate/ui/kommate_screen.dart';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 Map<String, WidgetBuilder> appRoutes = {
 =======
@@ -25,6 +26,24 @@ import 'package:komfy/features/profile/ui/profile_screen.dart';
 
 import '../../features/profile/ui/change_password.dart';
 import '../../features/profile/ui/edit_profile_screen.dart';
+import '../../features/profile/ui/settings_screen.dart';
+=======
+import 'package:komfy/features/komfess/ui/mood_recap_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen2.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen3.dart';
+import 'package:komfy/features/komfess/ui/mood_story_screen.dart';
+import 'package:komfy/features/komfess/model/mood_session_model.dart';
+import 'package:komfy/shared/widgets/komynfo_navbar.dart';
+import 'package:komfy/features/komynfo/ui/komynfo_screen.dart';
+import 'package:komfy/features/komynfo/ui/article_detail_screen.dart';
+import 'package:komfy/features/komynfo/ui/video_detail_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_detail_screen.dart';
+>>>>>>> Stashed changes
+
+import '../../features/profile/ui/change_password.dart';
+import '../../features/profile/ui/edit_profile_screen.dart';
+import '../../features/profile/ui/profile_screen.dart';
 import '../../features/profile/ui/settings_screen.dart';
 
 Map<String, WidgetBuilder> appRoutes = {
@@ -45,6 +64,14 @@ Map<String, WidgetBuilder> appRoutes = {
   '/komfess': (context) => const MoodRecapScreen(),
   '/navbar': (context) => const NavBar(),
   '/mood_input': (context) => MoodInputScreen(),
+<<<<<<< Updated upstream
+=======
+  '/komynfo_navbar': (context) => const KomynfoNavbar(),
+  '/komynfo': (context) => KomynfoScreen(),
+  '/komynfo_article': (context) => ArticleContentScreen(),
+  '/komynfo_video': (context) => VideoContentScreen(),
+  '/complete_profile': (context) => CompleteProfileScreen(),
+>>>>>>> Stashed changes
   '/profile': (context) => const ProfileScreen(),
   '/settings': (context) => SettingsScreen(),
   '/change_password': (context) => ChangePasswordScreen(),

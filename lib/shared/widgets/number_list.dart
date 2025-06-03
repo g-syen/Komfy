@@ -79,6 +79,7 @@ class NumberList extends StatelessWidget {
             strings.asMap().entries.map((entry) {
               int index = entry.key + 1; // Start from 1
               String str = entry.value;
+<<<<<<< Updated upstream
 
 <<<<<<< Updated upstream
           return Row(
@@ -102,6 +103,8 @@ class NumberList extends StatelessWidget {
                     color: Colors.black,
                     height: 1.55,
 =======
+=======
+>>>>>>> Stashed changes
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -119,7 +122,6 @@ class NumberList extends StatelessWidget {
                         height: 1.55,
                       ),
                     ),
->>>>>>> Stashed changes
                   ),
                 ],
               );
