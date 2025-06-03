@@ -6,7 +6,6 @@ import 'package:komfy/features/komynfo/ui/video_content_screen.dart';
 import 'package:komfy/features/onboarding/onboarding_screen.dart';
 import 'package:komfy/features/profile/ui/faq_screen.dart';
 import 'package:komfy/shared/widgets/navbar.dart';
-import 'package:komfy/shared/widgets/navbar.dart';
 import 'package:komfy/features/auth/ui/login_screen.dart';
 import 'package:komfy/features/auth/ui/register_screen.dart';
 import 'package:komfy/features/home/home_screen.dart';
@@ -22,7 +21,6 @@ import 'package:komfy/features/komynfo/ui/komynfo_screen.dart';
 import 'package:komfy/features/komynfo/ui/article_detail_screen.dart';
 import 'package:komfy/features/komynfo/ui/video_detail_screen.dart';
 import 'package:komfy/features/komfess/ui/mood_detail_screen.dart';
-
 import '../../features/profile/ui/change_password.dart';
 import '../../features/profile/ui/edit_profile_screen.dart';
 import '../../features/profile/ui/profile_screen.dart';

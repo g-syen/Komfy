@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -62,21 +65,41 @@ class _HomeScreenState extends State<HomeScreen> {
     "Pastikan jadwal yang Anda pilih sudah sesuai.",
     "Tekan tombol \"Daftar\".",
   ];
+  String username = '';
 
   @override
   void initState() {
     super.initState();
-    _checkMoodEntryToday();
+    _initializeApp();
   }
 
-  Future<void> _checkMoodEntryToday() async {
+  Future<void> _initializeApp() async {
     final today = DateTime.now();
     final startOfDay = DateTime(today.year, today.month, today.day);
     final endOfDay = startOfDay.add(Duration(days: 1));
 
     try {
+      final user = FirebaseAuth.instance.currentUser;
+      final userId = user!.uid;
+      final docSnapshot = await FirebaseFirestore.instance.collection('Users').doc(userId).get();
+
+      if(docSnapshot.exists) {
+        setState(() {
+          username = docSnapshot['namaPanggilan'];
+        });
+      }
+      if (user == null) {
+        log("No user logged in.");
+        setState(() {
+          hasFilledToday = false;
+          isLoading = false;
+        });
+        return;
+      }
+
       final snapshot = await FirebaseFirestore.instance
           .collection('mood_entries')
+          .where('userId', isEqualTo: user.uid)
           .where('timestamp', isGreaterThanOrEqualTo: startOfDay)
           .where('timestamp', isLessThan: endOfDay)
           .limit(1)
@@ -87,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
         isLoading = false;
       });
     } catch (e) {
-      print("Error checking mood entry: $e");
+      log("Error checking mood entry: $e");
       setState(() {
         isLoading = false;
       });
@@ -114,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             _buildHeader(screenWidth, screenHeight),
-            SizedBox(height: screenHeight * 0.018), // Responsive spacing
+            SizedBox(height: screenHeight * 0.018),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.only(bottom: screenWidth * 0.2), 
@@ -125,21 +148,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: screenWidth * 0.008), // Responsive padding
+                          padding: EdgeInsets.only(left: screenWidth * 0.008),
                           child: Text(
                             "Gimana perasaan kamu saat ini?",
                             style: AppTypography.subtitle3.copyWith(
-                              fontSize: screenWidth * 0.045, // Responsive font size
                             ),
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.006), // Responsive spacing
                         isLoading
                             ? Center(
-                                child: SizedBox(
-                                  width: screenWidth * 0.08, // Responsive loading indicator
-                                  height: screenWidth * 0.08,
-                                  child: const CircularProgressIndicator(),
+                          child: SizedBox(
+                            width: screenWidth * 0.08,
+                            height: screenWidth * 0.08,
+                            child: CircularProgressIndicator(),
                                 ),
                               )
                             : Column(
@@ -163,13 +184,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             }
                                           },
                                         ),
-                                  SizedBox(height: screenHeight * 0.012), // Responsive spacing
+                                  SizedBox(height: screenHeight * 0.005),
                                   FeatureCarousel(),
-                                  SizedBox(height: screenHeight * 0.012), // Responsive spacing
+                                  SizedBox(height: screenHeight * 0.012),
                                   Text(
                                     "Terasa lebih baik jika kita kenal dengan diri sendiri!",
                                     style: AppTypography.subtitle4.copyWith(
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                       fontSize: screenWidth * 0.04, // Responsive font size
                                     ),
@@ -193,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                   ),
                                   _buildMoreSection(screenWidth, screenHeight),
-                                  SizedBox(height: screenHeight * 0.012), // Responsive spacing
+                                  SizedBox(height: screenHeight * 0.012),
                                   _buildBottomInfo(screenWidth, screenHeight),
                                 ],
                               ),
@@ -221,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         color: AppColors.lightBlue,
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(width * 0.125), // Responsive border radius
+          bottom: Radius.circular(width * 0.125),
         ),
       ),
       child: Column(
@@ -230,15 +250,13 @@ class _HomeScreenState extends State<HomeScreen> {
           Text(
             "Komfy",
             style: AppTypography.title1.copyWith(
-              fontSize: width * 0.12,
               color: AppColors.darkBlue3,
               height: 0.9,
             ),
           ),
           Text(
-            "Hai, Jennie!",
+            "Hai, $username!",
             style: AppTypography.subtitle3.copyWith(
-              fontSize: width * 0.05,
               color: AppColors.darkBlue3,
             ),
           ),
@@ -258,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Navigator.pushNamed(context, '/komynfo_navbar');
       },
       child: Padding(
-        padding: EdgeInsets.only(top: screenHeight * 0.012), // Responsive padding
+        padding: EdgeInsets.only(top: screenHeight * 0.005), // Responsive padding
         child: Align(
           alignment: Alignment.centerLeft,
           child: RichText(
@@ -299,18 +317,16 @@ class _HomeScreenState extends State<HomeScreen> {
       animationType: AnimationType.grow,
       isCloseButton: false,
       isOverlayTapDismiss: false,
-      alertPadding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
-      backgroundColor: Colors.white, 
+      alertPadding: EdgeInsets.all(screenWidth * 0.04),
+      backgroundColor: Colors.white,
       alertBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(screenWidth * 0.03), // Responsive border radius
+        borderRadius: BorderRadius.circular(screenWidth * 0.03),
       ),
       titleStyle: AppTypography.subtitle2.copyWith(
         color: Colors.black,
-        fontSize: screenWidth * 0.045, // Responsive font size
       ),
       descStyle: AppTypography.subtitle3.copyWith(
         color: Colors.black,
-        fontSize: screenWidth * 0.035, // Responsive font size
       ),
     );
 
@@ -326,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
               screenHeight * 0.04, 
               screenWidth * 0.04, 
               0
-            ), // Responsive padding
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -337,12 +353,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Tutorial atur Jadwal Konseling",
                     style: AppTypography.subtitle2.copyWith(
                       color: Colors.black,
-                      fontSize: screenWidth * 0.045, // Responsive font size
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.012), // Responsive spacing
+                SizedBox(height: screenHeight * 0.012),
                 NumberList(tutorialKonseling),
                 Padding(
                   padding: EdgeInsets.fromLTRB(
@@ -350,7 +365,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     0, 
                     screenWidth * 0.025, 
                     0
-                  ), // Responsive padding
+                  ),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: CustomButton(
@@ -366,8 +381,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: -screenHeight * 0.01, // Responsive positioning
-            left: -screenWidth * 0.02, // Responsive positioning
+            top: -screenHeight * 0.01,
+            left: -screenWidth * 0.02,
             child: IconButton(
               icon: Icon(
                 Icons.close, 
@@ -413,16 +428,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.0125), // Responsive margin
-                padding: EdgeInsets.all(screenWidth * 0.03), // Responsive padding
+                margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.0125),
+                padding: EdgeInsets.all(screenWidth * 0.03),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Responsive border radius
+                  borderRadius: BorderRadius.circular(screenWidth * 0.04),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
-                      blurRadius: screenWidth * 0.02, // Responsive blur radius
-                      offset: Offset(0, screenHeight * 0.005), // Responsive offset
+                      blurRadius: screenWidth * 0.02,
+                      offset: Offset(0, screenHeight * 0.005),
                     ),
                   ],
                 ),
@@ -444,7 +459,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             item['description'],
                             style: AppTypography.bodyText4.copyWith(
                               color: AppColors.darkBlue,
-                              fontSize: screenWidth * 0.032, // Responsive font size
                             ),
                           ),
                         ),
@@ -458,7 +472,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: AppTypography.bodyText4.copyWith(
                           fontWeight: FontWeight.bold,
                           color: AppColors.darkBlue,
-                          fontSize: screenWidth * 0.032, // Responsive font size
                         ),
                         textAlign: TextAlign.right,
                       ),
@@ -475,15 +488,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCardRecap(BuildContext context, double screenWidth, double screenHeight) {
     return Container(
-      padding: EdgeInsets.all(screenWidth * 0.025), // Responsive padding
+      padding: EdgeInsets.all(screenWidth * 0.025),
       decoration: BoxDecoration(
         color: AppColors.darkBlue,
-        borderRadius: BorderRadius.circular(screenWidth * 0.04), // Responsive border radius
+        borderRadius: BorderRadius.circular(screenWidth * 0.04),
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
-            blurRadius: screenWidth * 0.0125, // Responsive blur radius
-            offset: Offset(0, screenHeight * 0.005), // Responsive offset
+            blurRadius: screenWidth * 0.0125,
+            offset: Offset(0, screenHeight * 0.005),
           ),
         ],
       ),
@@ -544,7 +557,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 text: '\nIngin tahu rekap Mood kamu?\n',
                 style: AppTypography.bodyText3.copyWith(
                   color: AppColors.white,
-                  fontSize: screenWidth * 0.035, // Responsive font size
                 ),
                 children: [
                   TextSpan(
@@ -553,7 +565,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: AppColors.white,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline,
-                      fontSize: screenWidth * 0.035, // Responsive font size
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {

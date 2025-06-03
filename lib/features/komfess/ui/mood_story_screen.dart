@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:komfy/shared/widgets/navbar.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:komfy/features/komfess/model/mood_session_model.dart';
@@ -61,98 +60,91 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
 
     showDialog(
       context: context,
-      builder:
-          (context) =>
-          AlertDialog(
-            title: Text(
-              'Masukkan Judul Mood Tracker',
-              style: AppTypography.subtitle2,
-            ),
-            content: TextField(
-              controller: _titleController,
-              decoration: InputDecoration(
-                hintText: 'Contoh: Hari yang melelahkan',
+      builder: (context) => AlertDialog(
+        title: Text('Masukkan Judul Mood Tracker', style: AppTypography.subtitle2),
+        content: TextField(
+          controller: _titleController,
+          decoration: InputDecoration(hintText: 'Contoh: Hari yang melelahkan'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              'Batal',
+              style: AppTypography.subtitle4.copyWith(
+                color: AppColors.red,
+                fontSize: 14,
               ),
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  'Batal',
-                  style: AppTypography.subtitle4.copyWith(
-                    color: AppColors.red,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _saveMoodToFirebase();
-                },
-                child: Text(
-                  'Simpan',
-                  style: AppTypography.subtitle4.copyWith(
-                    color: AppColors.blue2,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _saveMoodToFirebase();
+            },
+            child: Text(
+              'Simpan',
+              style: AppTypography.subtitle4.copyWith(
+                color: AppColors.blue2,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+
 
   void _showConfirmationDialog() {
     showDialog(
       context: context,
-      builder:
-          (context) =>
-          AlertDialog(
-            title: RichText(
-              text: TextSpan(
-                style: AppTypography.subtitle4.copyWith(color: Colors.black),
-                children: [
-                  TextSpan(text: 'Simpan '),
-                  TextSpan(
-                    text: 'Mood Tracker',
-                    style: AppTypography.subtitle3.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  TextSpan(text: ' hari ini?'),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  'Edit',
-                  style: AppTypography.subtitle3.copyWith(
-                    color: AppColors.red,
-                    fontSize: 14,
-                  ),
+      builder: (context) => AlertDialog(
+        title: RichText(
+          text: TextSpan(
+            style: AppTypography.subtitle4.copyWith(color: Colors.black),
+            children: [
+              TextSpan(text: 'Simpan '),
+              TextSpan(
+                text: 'Mood Tracker',
+                style: AppTypography.subtitle4.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _showTitleInputDialog();
-                },
-                child: Text(
-                  'Simpan',
-                  style: AppTypography.subtitle4.copyWith(
-                    color: AppColors.blue2,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
+              TextSpan(text: ' hari ini?'),
             ],
           ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              'Edit',
+              style: AppTypography.subtitle3.copyWith(
+                color: AppColors.red,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _showTitleInputDialog();
+            },
+            child: Text(
+              'Simpan',
+              style: AppTypography.subtitle4.copyWith(
+                color: AppColors.blue2,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+
 
   Future<void> _saveMoodToFirebase() async {
     setState(() => isSaving = true);
@@ -164,9 +156,9 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
 
     if (!widget.moodSession.isComplete) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Data mood belum lengkap.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Data mood belum lengkap.')),
+        );
       }
       if (mounted) setState(() => isSaving = false);
       return;
@@ -175,9 +167,9 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('User belum login.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User belum login.')),
+        );
         setState(() => isSaving = false);
       }
       return;
@@ -191,8 +183,7 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
       selectedMoodLabel: widget.moodSession.selectedMoodLabel!,
       reasonIcons: widget.moodSession.reasonIcons,
       reasons: widget.moodSession.reasons,
-      feelingIconCodes:
-      widget.moodSession.feelingIcons.map((e) => e.codePoint).toList(),
+      feelingIconCodes: widget.moodSession.feelingIcons.map((e) => e.codePoint).toList(),
       feelings: widget.moodSession.feelings,
       story: widget.moodSession.story ?? '',
       title: _titleController.text.trim(),
@@ -254,16 +245,22 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
       }
 
       if (mounted) {
-        ScaffoldMessenger.of(
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Mood berhasil disimpan!')),
+        );
+        Navigator.pushAndRemoveUntil(
           context,
-        ).showSnackBar(SnackBar(content: Text('Mood berhasil disimpan!')));
-        Navigator.pushNamed(context, '/komfess');
+          MaterialPageRoute(
+            builder: (context) => NavBar(initialIndex: 2), // Index 2 = Komfess
+          ),
+              (route) => false,
+        );
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Gagal menyimpan: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Gagal menyimpan: $e')),
+        );
       }
     } finally {
       if (mounted) {
@@ -287,23 +284,31 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (svgIconPath != null)
-            SvgPicture.asset(svgIconPath, height: 30, width: 30),
+            SvgPicture.asset(
+              svgIconPath,
+              height: 30,
+              width: 30,
+            ),
           if (icon != null)
-            Icon(icon, size: 30, color: const Color(0xFF0B1956)),
-          if (svgIconPath != null || icon != null) const SizedBox(height: 5),
+            Icon(
+              icon,
+              size: 30,
+              color: const Color(0xFF0B1956),
+            ),
+          if (svgIconPath != null || icon != null)
+            const SizedBox(height: 5),
           Flexible(
             child: Text(
               text,
               textAlign: TextAlign.center,
-              style: AppTypography.subtitle4.copyWith(
-                color: AppColors.darkBlue,
-              ),
+              style: AppTypography.subtitle4.copyWith(color: AppColors.darkBlue),
             ),
           ),
         ],
       ),
     );
   }
+
 
   Widget buildMoodEmoji() {
     return Container(
@@ -329,15 +334,16 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
               widget.moodSession.selectedMoodLabel ?? '',
               textAlign: TextAlign.center,
               softWrap: true,
-              style: AppTypography.subtitle4.copyWith(
-                color: AppColors.darkBlue,
-              ),
+              style: AppTypography.subtitle4.copyWith(color: AppColors.darkBlue),
             ),
           ),
         ],
       ),
     );
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -348,31 +354,21 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
           children: [
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.only(
-                top: 30,
-                left: 20,
-                right: 20,
-                bottom: 15,
-              ),
+              padding: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 15),
               child: Column(
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.black,
-                        ),
+                        Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
                         SizedBox(width: 4),
                         Text("Kembali", style: AppTypography.subtitle3),
                       ],
                     ),
                   ),
                   SizedBox(height: 35),
-                  Center(
-                    child: Text("Mood Tracker", style: AppTypography.title1),
-                  ),
+                  Center(child: Text("Mood Tracker", style: AppTypography.title1)),
                 ],
               ),
             ),
@@ -391,18 +387,12 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 15,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                         child: Column(
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text(
-                                "${widget.currentStep}/4",
-                                style: AppTypography.subtitle3,
-                              ),
+                              child: Text("${widget.currentStep}/4", style: AppTypography.subtitle3),
                             ),
                             SizedBox(height: 8),
                             ClipRRect(
@@ -410,9 +400,7 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                               child: LinearProgressIndicator(
                                 value: widget.currentStep / 4,
                                 backgroundColor: Colors.white,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Color(0xFF1A3E78),
-                                ),
+                                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A3E78)),
                                 minHeight: 6,
                               ),
                             ),
@@ -421,9 +409,7 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 dateFormatted,
-                                style: AppTypography.subtitle2.copyWith(
-                                  color: Colors.black,
-                                ),
+                                style: AppTypography.subtitle2.copyWith(color: Colors.black),
                               ),
                             ),
                           ],
@@ -433,27 +419,18 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                          child:
-                          localeInitialized
+                          child: localeInitialized
                               ? SingleChildScrollView(
                             child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Mood :",
-                                  style: AppTypography.subtitle2
-                                      .copyWith(color: Colors.black),
-                                ),
+                                Text("Mood :", style: AppTypography.subtitle2.copyWith(color: Colors.black)),
                                 SizedBox(height: 5),
                                 buildMoodEmoji(),
                                 SizedBox(height: 15),
                                 Text(
-                                  "Hal yang membuat kamu merasa ${widget
-                                      .moodSession.selectedMoodLabel
-                                      ?.toLowerCase()} :",
-                                  style: AppTypography.subtitle3
-                                      .copyWith(color: Colors.black),
+                                  "Hal yang membuat kamu merasa ${widget.moodSession.selectedMoodLabel?.toLowerCase()} :",
+                                  style: AppTypography.subtitle3.copyWith(color: Colors.black),
                                 ),
                                 SizedBox(height: 5),
                                 Wrap(
@@ -461,27 +438,18 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                                   runSpacing: 5,
                                   children: List.generate(
                                     widget.moodSession.reasons.length,
-                                        (index) =>
-                                        buildTagBox(
-                                          widget.moodSession.reasons[index],
-                                          svgIconPath:
-                                          index <
-                                              widget
-                                                  .moodSession
-                                                  .reasonIcons
-                                                  .length
-                                              ? widget
-                                              .moodSession
-                                              .reasonIcons[index]
-                                              : null,
-                                        ),
+                                        (index) => buildTagBox(
+                                      widget.moodSession.reasons[index],
+                                      svgIconPath: index < widget.moodSession.reasonIcons.length
+                                          ? widget.moodSession.reasonIcons[index]
+                                          : null,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(height: 15),
                                 Text(
                                   "Perasaanmu terhadap hal tersebut :",
-                                  style: AppTypography.subtitle3
-                                      .copyWith(color: Colors.black),
+                                  style: AppTypography.subtitle3.copyWith(color: Colors.black),
                                 ),
                                 SizedBox(height: 5),
                                 Wrap(
@@ -489,60 +457,36 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                                   runSpacing: 5,
                                   children: List.generate(
                                     widget.moodSession.feelings.length,
-                                        (index) =>
-                                        buildTagBox(
-                                          widget
-                                              .moodSession
-                                              .feelings[index],
-                                          icon:
-                                          (index <
-                                              widget
-                                                  .moodSession
-                                                  .feelingIcons
-                                                  .length)
-                                              ? widget
-                                              .moodSession
-                                              .feelingIcons[index]
-                                              : null,
-                                        ),
+                                        (index) => buildTagBox(
+                                      widget.moodSession.feelings[index],
+                                      icon: (index < widget.moodSession.feelingIcons.length)
+                                          ? widget.moodSession.feelingIcons[index]
+                                          : null,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(height: 15),
                                 Text(
                                   "Yuk cerita di sini!",
-                                  style: AppTypography.subtitle3
-                                      .copyWith(color: Colors.black),
+                                  style: AppTypography.subtitle3.copyWith(color: Colors.black),
                                 ),
                                 SizedBox(height: 5),
                                 Container(
                                   decoration: BoxDecoration(
                                     color: Color(0xFFF4F9FF),
-                                    borderRadius: BorderRadius.circular(
-                                      15,
-                                    ),
-                                    border: Border.all(
-                                      color: Colors.black,
-                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(color: Colors.black),
                                   ),
                                   child: TextField(
                                     controller: _storyController,
                                     maxLines: 6,
                                     decoration: InputDecoration(
-                                      hintText:
-                                      'Tuliskan cerita atau pengalamanmu hari ini...',
-                                      hintStyle: AppTypography.bodyText3
-                                          .copyWith(
-                                        color: Color(0xFF8F8E8E),
-                                      ),
+                                      hintText: 'Tuliskan cerita atau pengalamanmu hari ini...',
+                                      hintStyle: AppTypography.bodyText3.copyWith(color: Color(0xFF8F8E8E)),
                                       border: InputBorder.none,
-                                      contentPadding: EdgeInsets.all(
-                                        16,
-                                      ),
+                                      contentPadding: EdgeInsets.all(16),
                                     ),
-                                    style: AppTypography.bodyText2
-                                        .copyWith(
-                                      color: Color(0xFF0B1956),
-                                    ),
+                                    style: AppTypography.bodyText2.copyWith(color: Color(0xFF0B1956)),
                                   ),
                                 ),
                                 SizedBox(height: 20),
@@ -551,39 +495,29 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                           )
                               : Center(
                             child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Color(0xFF1A3E78),
-                              ),
+                              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A3E78)),
                             ),
                           ),
                         ),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 32,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             OutlinedButton(
                               onPressed: () => Navigator.pop(context),
                               style: OutlinedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               ),
                               child: Text(
                                 'Sebelumnya',
-                                style: AppTypography.subtitle4.copyWith(
-                                  color: Color(0xFF0B1956),
-                                ),
+                                style: AppTypography.subtitle4.copyWith(color: Color(0xFF0B1956)),
                               ),
                             ),
                             ElevatedButton(
-                              onPressed:
-                              isSaving ? null : _showConfirmationDialog,
+                              onPressed: isSaving ? null : _showConfirmationDialog,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -594,8 +528,7 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                                   ),
                                 ),
                               ),
-                              child:
-                              isSaving
+                              child: isSaving
                                   ? Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -604,26 +537,14 @@ class _MoodStoryScreenState extends State<MoodStoryScreen> {
                                     height: 16,
                                     child: CircularProgressIndicator(
                                       strokeWidth: 2,
-                                      valueColor:
-                                      AlwaysStoppedAnimation<Color>(
-                                        Colors.white,
-                                      ),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                     ),
                                   ),
                                   SizedBox(width: 8),
-                                  Text(
-                                    'Menyimpan...',
-                                    style: AppTypography.subtitle4
-                                        .copyWith(color: Colors.white),
-                                  ),
+                                  Text('Menyimpan...', style: AppTypography.subtitle4.copyWith(color: Colors.white)),
                                 ],
                               )
-                                  : Text(
-                                'Simpan',
-                                style: AppTypography.subtitle4.copyWith(
-                                  color: Color(0xFF284082),
-                                ),
-                              ),
+                                  : Text('Simpan', style: AppTypography.subtitle4.copyWith(color: Color(0xFF284082))),
                             ),
                           ],
                         ),

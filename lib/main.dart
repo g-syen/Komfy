@@ -8,7 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:komfy/core/navigation/app_router.dart';
 import 'package:komfy/shared/screens/splash_screen.dart';
 
-
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final ValueNotifier<bool> drawerStateNotifier = ValueNotifier<bool>(false);
 
@@ -37,7 +36,8 @@ class _KomfyAppState extends State<KomfyApp> {
     final prefs = await SharedPreferences.getInstance();
     final hasSeen = prefs.getBool('seenOnBoardingScreen') ?? false;
     final bool isLoggedIn;
-    if (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) {
+    if (FirebaseAuth.instance.currentUser != null &&
+        FirebaseAuth.instance.currentUser!.emailVerified) {
       isLoggedIn = true;
     } else {
       isLoggedIn = false;
@@ -46,15 +46,13 @@ class _KomfyAppState extends State<KomfyApp> {
     log("hasSeen: $hasSeen, isLoggedIn: $isLoggedIn");
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final route = hasSeen
-          ? (isLoggedIn ? '/navbar' : '/login')
-          : '/onboarding';
+      final route =
+          hasSeen ? (isLoggedIn ? '/navbar' : '/login') : '/onboarding';
 
       log("Navigating to: $route");
       navigatorKey.currentState?.pushReplacementNamed(route);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +63,7 @@ class _KomfyAppState extends State<KomfyApp> {
         title: 'Komfy',
         theme: lightMode,
         onGenerateRoute: generateRoute,
-        home: const SplashScreen(),
+        home: const Scaffold(body: Center(child: CircularProgressIndicator())),
       ),
     );
   }
