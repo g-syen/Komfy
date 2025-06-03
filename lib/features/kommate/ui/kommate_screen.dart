@@ -47,6 +47,7 @@ class _KommateScreenState extends State<KommateScreen> {
   String topic = '';
   String _selectedDate = '';
   String _warning = '';
+  String _error = '';
   String _existingChatRoomID = '';
   bool _isAwaitingResponse = false;
   bool _hasShownUrgentDialog = false;
@@ -219,6 +220,7 @@ class _KommateScreenState extends State<KommateScreen> {
             ),
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             Positioned(
               top: 100,
               left: 0,
@@ -255,6 +257,8 @@ class _KommateScreenState extends State<KommateScreen> {
                               IconButton(
                                 onPressed: () {
 =======
+=======
+>>>>>>> Stashed changes
               Positioned(
                 top: MediaQuery.of(context).size.height * 0.15,
                 left: 0,
@@ -312,148 +316,148 @@ class _KommateScreenState extends State<KommateScreen> {
                                             return StatefulBuilder(
                                               builder:
                                                   (
-                                                    context,
-                                                    setState,
+                                                  context,
+                                                  setState,
                                                   ) => AlertDialog(
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            16,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                    16,
+                                                  ),
+                                                ),
+                                                contentPadding:
+                                                EdgeInsets.zero,
+                                                content: Column(
+                                                  mainAxisSize:
+                                                  MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .stretch,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                        24,
+                                                        24,
+                                                        24,
+                                                        8,
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          Text(
+                                                            "We Care About You!",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                              fontSize: 20,
+                                                            ),
                                                           ),
-                                                    ),
-                                                    contentPadding:
-                                                        EdgeInsets.zero,
-                                                    content: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets.fromLTRB(
-                                                                24,
-                                                                24,
-                                                                24,
-                                                                8,
-                                                              ),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                "We Care About You!",
-                                                                style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 20,
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 16,
-                                                              ),
-                                                              Text(
-                                                                "Tidak harus buat janjian kok, cukup chat aja dulu bapaknya. "
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          Text(
+                                                            "Tidak harus buat janjian kok, cukup chat aja dulu bapaknya. "
                                                                 "Semua akan terasa lebih ringan kalau kamu mulai terbuka... "
                                                                 "tenang aja, gaada yang bakal nge-judge kamu  loh -- yuk, gapai ke profesional!",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .justify,
-                                                                style:
-                                                                    TextStyle(
-                                                                      fontSize:
-                                                                          16,
-                                                                    ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 20,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Divider(
-                                                          thickness: 1,
-                                                          height: 1,
-                                                        ),
-                                                        InkWell(
-                                                          customBorder: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius.only(
-                                                                  bottomLeft:
-                                                                      Radius.circular(
-                                                                        16.0,
-                                                                      ),
-                                                                  bottomRight:
-                                                                      Radius.circular(
-                                                                        16.0,
-                                                                      ),
-                                                                ),
-                                                          ),
-                                                          onTap: () async {
-                                                            Navigator.pop(
-                                                              context,
-                                                            );
-                                                            openWhatsAppChat(
-                                                              '6281803805321',
-                                                            );
-                                                          },
-                                                          child: Container(
-                                                            padding:
-                                                                EdgeInsets.symmetric(
-                                                                  vertical: 16,
-                                                                ),
-                                                            decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius.only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                          16.0,
-                                                                        ),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                          16.0,
-                                                                        ),
-                                                                  ),
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .whatsapp,
-                                                                  color:
-                                                                      Colors
-                                                                          .green,
-                                                                  size: 28,
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Text(
-                                                                  'WhatsApp ULTKSP',
-                                                                  style: TextStyle(
-                                                                    fontSize:
-                                                                        18,
-                                                                    color:
-                                                                        Colors
-                                                                            .green,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                            textAlign:
+                                                            TextAlign
+                                                                .justify,
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              16,
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
+                                                    Divider(
+                                                      thickness: 1,
+                                                      height: 1,
+                                                    ),
+                                                    InkWell(
+                                                      customBorder: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius.only(
+                                                          bottomLeft:
+                                                          Radius.circular(
+                                                            16.0,
+                                                          ),
+                                                          bottomRight:
+                                                          Radius.circular(
+                                                            16.0,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      onTap: () async {
+                                                        Navigator.pop(
+                                                          context,
+                                                        );
+                                                        openWhatsAppChat(
+                                                          '6281803805321',
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        padding:
+                                                        EdgeInsets.symmetric(
+                                                          vertical: 16,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                          borderRadius:
+                                                          BorderRadius.only(
+                                                            bottomLeft:
+                                                            Radius.circular(
+                                                              16.0,
+                                                            ),
+                                                            bottomRight:
+                                                            Radius.circular(
+                                                              16.0,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                          children: [
+                                                            FaIcon(
+                                                              FontAwesomeIcons
+                                                                  .whatsapp,
+                                                              color:
+                                                              Colors
+                                                                  .green,
+                                                              size: 28,
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            Text(
+                                                              'WhatsApp ULTKSP',
+                                                              style: TextStyle(
+                                                                fontSize:
+                                                                18,
+                                                                color:
+                                                                Colors
+                                                                    .green,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .bold,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             );
                                           },
                                         );
@@ -477,9 +481,10 @@ class _KommateScreenState extends State<KommateScreen> {
                             Builder(
                               builder: (context) {
                                 WidgetsBinding.instance.addPostFrameCallback((
-                                  _,
-                                ) {
+                                    _,
+                                    ) {
                                   setState(() => _hasShownUrgentDialog = true);
+<<<<<<< Updated upstream
 
 >>>>>>> Stashed changes
                                   showDialog(
@@ -844,6 +849,142 @@ class _KommateScreenState extends State<KommateScreen> {
                                   },
                                 );
                               });
+=======
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return StatefulBuilder(
+                                        builder:
+                                            (context, setState) => AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(16),
+                                          ),
+                                          contentPadding: EdgeInsets.zero,
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.fromLTRB(
+                                                  24,
+                                                  24,
+                                                  24,
+                                                  8,
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .center,
+                                                  children: [
+                                                    Text(
+                                                      "We Care About You!",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                        FontWeight.bold,
+                                                        fontSize: 20,
+                                                        decoration:
+                                                        TextDecoration
+                                                            .underline,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 16),
+                                                    Text(
+                                                      "Kamu lagi capek ya? Kamu nggak sendirian kok. "
+                                                          "Kadang perasaan itu memang berat untuk dipikul sendiri... "
+                                                          "tapi kamu nggak harus menghadapinya sendirian -- yuk, gapai ke profesional!",
+                                                      textAlign:
+                                                      TextAlign.justify,
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Divider(
+                                                thickness: 1,
+                                                height: 1,
+                                              ),
+                                              InkWell(
+                                                customBorder:
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.only(
+                                                    bottomLeft:
+                                                    Radius.circular(
+                                                      16.0,
+                                                    ),
+                                                    bottomRight:
+                                                    Radius.circular(
+                                                      16.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                                onTap: () async {
+                                                  Navigator.pop(context);
+                                                  openWhatsAppChat(
+                                                    '6281803805321',
+                                                  );
+                                                },
+                                                child: Container(
+                                                  padding:
+                                                  EdgeInsets.symmetric(
+                                                    vertical: 16,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                      bottomLeft:
+                                                      Radius.circular(
+                                                        16.0,
+                                                      ),
+                                                      bottomRight:
+                                                      Radius.circular(
+                                                        16.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .center,
+                                                    children: [
+                                                      FaIcon(
+                                                        FontAwesomeIcons
+                                                            .whatsapp,
+                                                        color: Colors.green,
+                                                        size: 28,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        'WhatsApp ULTKSP',
+                                                        style: TextStyle(
+                                                          fontSize: 18,
+                                                          color:
+                                                          Colors.green,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                });
+>>>>>>> Stashed changes
 
                               return SizedBox(); // Placeholder
                             },
@@ -953,93 +1094,93 @@ class _KommateScreenState extends State<KommateScreen> {
                       return StatefulBuilder(
                         builder:
                             (context, setState) => AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              contentPadding: EdgeInsets.zero,
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                      24,
-                                      24,
-                                      24,
-                                      8,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          contentPadding: EdgeInsets.zero,
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  24,
+                                  24,
+                                  24,
+                                  8,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "We Care About You!",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        decoration:
+                                        TextDecoration.underline,
+                                      ),
                                     ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "We Care About You!",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Tidak harus buat janjian kok, cukup chat aja dulu bapaknya. "
+                                    SizedBox(height: 16),
+                                    Text(
+                                      "Tidak harus buat janjian kok, cukup chat aja dulu bapaknya. "
                                           "Semua akan terasa lebih ringan kalau kamu mulai terbuka... "
                                           "tenang aja, gaada yang bakal nge-judge kamu  loh -- yuk, gapai ke profesional!",
-                                          textAlign: TextAlign.justify,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        SizedBox(height: 20),
-                                      ],
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(fontSize: 16),
                                     ),
-                                  ),
-                                  Divider(thickness: 1, height: 1),
-                                  InkWell(
-                                    customBorder: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(16.0),
-                                        bottomRight: Radius.circular(16.0),
-                                      ),
-                                    ),
-                                    onTap: () async {
-                                      Navigator.pop(context);
-                                      openWhatsAppChat('6281803805321');
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: 16,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(16.0),
-                                          bottomRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          FaIcon(
-                                            FontAwesomeIcons.whatsapp,
-                                            color: Colors.green,
-                                            size: 28,
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Text(
-                                            'WhatsApp ULTKSP',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.green,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                    SizedBox(height: 20),
+                                  ],
+                                ),
                               ),
-                            ),
+                              Divider(thickness: 1, height: 1),
+                              InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(16.0),
+                                    bottomRight: Radius.circular(16.0),
+                                  ),
+                                ),
+                                onTap: () async {
+                                  Navigator.pop(context);
+                                  openWhatsAppChat('6281803805321');
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 16,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      FaIcon(
+                                        FontAwesomeIcons.whatsapp,
+                                        color: Colors.green,
+                                        size: 28,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        'WhatsApp ULTKSP',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   );
@@ -1068,18 +1209,22 @@ class _KommateScreenState extends State<KommateScreen> {
                       return StatefulBuilder(
                         builder:
                             (context, setState) => AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              insetPadding: EdgeInsets.all(0),
-                              contentPadding: EdgeInsets.zero,
-                              content: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          insetPadding: EdgeInsets.all(0),
+                          contentPadding: EdgeInsets.zero,
+                          content: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.stretch,
+                              children: [
+                                Stack(
+                                  alignment: Alignment.center,
                                   children: [
+<<<<<<< Updated upstream
                                     Stack(
                                       alignment: Alignment.center,
                                       children: [
@@ -1122,31 +1267,72 @@ class _KommateScreenState extends State<KommateScreen> {
                                                 Icons.close,
                                                 color: Colors.black,
                                               ),
+=======
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        24,
+                                        24,
+                                        24,
+                                        8,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          SizedBox(height: 25),
+                                          Text(
+                                            "Tutorial atur Jadwal Konseling",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+>>>>>>> Stashed changes
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          SizedBox(height: 16),
+                                          NumberList(tutorialKonseling),
+                                        ],
+                                      ),
                                     ),
 
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                        16,
-                                        0,
-                                        16,
-                                        16,
-                                      ),
-                                      child: CustomButton(
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                          _launchURL();
-                                        },
-                                        text: "Jadwalkan Sekarang",
+                                    Positioned(
+                                      top: 10,
+                                      left: 10,
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: IconButton(
+                                          padding: EdgeInsets.all(0.0),
+                                          onPressed: () async {
+                                            Navigator.pop(context);
+                                          },
+                                          icon: Icon(
+                                            Icons.close,
+                                            color: Colors.black,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
+
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                    16,
+                                    0,
+                                    16,
+                                    16,
+                                  ),
+                                  child: CustomButton(
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      _launchURL();
+                                    },
+                                    text: "Jadwalkan Sekarang",
+                                  ),
+                                ),
+                              ],
                             ),
+                          ),
+                        ),
                       );
                     },
                   );
@@ -1220,7 +1406,7 @@ class _KommateScreenState extends State<KommateScreen> {
 
           return ListView.builder(
             itemCount:
-                _isAwaitingResponse ? messages.length + 1 : messages.length,
+            _isAwaitingResponse ? messages.length + 1 : messages.length,
             itemBuilder: (context, index) {
               if (_isAwaitingResponse && index == messages.length) {
                 return _buildLoadingBubble();
@@ -1252,7 +1438,7 @@ class _KommateScreenState extends State<KommateScreen> {
         return ListView.builder(
           controller: _scrollController,
           itemCount:
-              _isAwaitingResponse ? messages.length + 1 : messages.length,
+          _isAwaitingResponse ? messages.length + 1 : messages.length,
           itemBuilder: (context, index) {
             if (_isAwaitingResponse && index == messages.length) {
               return _buildLoadingBubble();
@@ -1320,7 +1506,7 @@ class _KommateScreenState extends State<KommateScreen> {
       case 'text':
         return Row(
           mainAxisAlignment:
-              isCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+          isCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
             ChatBubble(
               isCurrentUser: isCurrentUser,
@@ -1394,11 +1580,11 @@ class _KommateScreenState extends State<KommateScreen> {
                 return GestureDetector(
                   onTap:
                       () => {
-                        setState(() {
-                          _controller.text = topic;
-                          this.topic = topic;
-                        }),
-                      },
+                    setState(() {
+                      _controller.text = topic;
+                      this.topic = topic;
+                    }),
+                  },
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
@@ -1443,7 +1629,7 @@ class _KommateScreenState extends State<KommateScreen> {
           log(snapshot.error.toString(), name: 'Error Snapshot');
           return Row(
             mainAxisAlignment:
-                isCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+            isCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: [
               ChatBubble(
                 message: data["message"],
@@ -1458,7 +1644,7 @@ class _KommateScreenState extends State<KommateScreen> {
 
         return Row(
           mainAxisAlignment:
-              isCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+          isCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
             ChatBubble(
               message: decryptedMessage,
@@ -1515,97 +1701,97 @@ class _KommateScreenState extends State<KommateScreen> {
                   icon: const Icon(MyIcons.sendFill),
                   color: isTextEmpty ? Colors.grey[300] : Colors.black,
                   onPressed:
-                      isTextEmpty
-                          ? null
-                          : () async {
-                            final Map<String, dynamic> result;
-                            final String message = _controller.text.trim();
-                            _controller.clear();
+                  isTextEmpty
+                      ? null
+                      : () async {
+                    final Map<String, dynamic> result;
+                    final String message = _controller.text.trim();
+                    _controller.clear();
 
-                            if (topic.isEmpty) {
-                              Message newMessage = Message(
-                                senderID: _auth.currentUser!.uid,
-                                message: message,
-                                timestamp: Timestamp.now(),
-                              );
-                              Message topicPicker = Message(
-                                senderID: 'gemini',
-                                message:
-                                    'Permasalahan apa yang sedang kamu hadapi?',
-                                timestamp: Timestamp.now(),
-                                messageType: 'topic_picker',
-                              );
-                              _tempMessages.addAll([newMessage, topicPicker]);
-                              setState(() {
-                                _tempMessageStream.add(_tempMessages);
-                              });
-                              return;
-                            }
-                            if (_existingChatRoomID.isEmpty) {
-                              String chatRoomID =
-                                  await _chatService.getChatRoomID();
+                    if (topic.isEmpty) {
+                      Message newMessage = Message(
+                        senderID: _auth.currentUser!.uid,
+                        message: message,
+                        timestamp: Timestamp.now(),
+                      );
+                      Message topicPicker = Message(
+                        senderID: 'gemini',
+                        message:
+                        'Permasalahan apa yang sedang kamu hadapi?',
+                        timestamp: Timestamp.now(),
+                        messageType: 'topic_picker',
+                      );
+                      _tempMessages.addAll([newMessage, topicPicker]);
+                      setState(() {
+                        _tempMessageStream.add(_tempMessages);
+                      });
+                      return;
+                    }
+                    if (_existingChatRoomID.isEmpty) {
+                      String chatRoomID =
+                      await _chatService.getChatRoomID();
 
-                              for (var message in _tempMessages) {
-                                if (message.senderID == 'gemini') {
-                                  await _chatService.saveAutomatedMessage(
-                                    message.message,
-                                    chatRoomID,
-                                  );
-                                } else {
-                                  await _chatService.saveUserMessage(
-                                    message.message,
-                                    chatRoomID,
-                                  );
-                                }
-                              }
-                              _tempMessages.clear();
-                              _tempMessageStream.add(_tempMessages);
-                              await _chatService.saveUserMessage(
-                                message,
-                                chatRoomID,
-                              );
-                              setState(() {
-                                _existingChatRoomID = chatRoomID;
-                                _messageStream = _chatService.getMessages(
-                                  chatRoomID,
-                                );
-                                _isAwaitingResponse = true;
-                              });
-                              result = await _chatService.sendMessage(
-                                message,
-                                isFirstMessage: true,
-                                existingChatRoomID: chatRoomID,
-                              );
-                            } else {
-                              await _chatService.saveUserMessage(
-                                message,
-                                _existingChatRoomID,
-                              );
-                              setState(() {
-                                _messageStream = _chatService.getMessages(
-                                  _existingChatRoomID,
-                                );
-                                _isAwaitingResponse = true;
-                              });
-                              result = await _chatService.sendMessage(
-                                message,
-                                existingChatRoomID: _existingChatRoomID,
-                              );
-                            }
+                      for (var message in _tempMessages) {
+                        if (message.senderID == 'gemini') {
+                          await _chatService.saveAutomatedMessage(
+                            message.message,
+                            chatRoomID,
+                          );
+                        } else {
+                          await _chatService.saveUserMessage(
+                            message.message,
+                            chatRoomID,
+                          );
+                        }
+                      }
+                      _tempMessages.clear();
+                      _tempMessageStream.add(_tempMessages);
+                      await _chatService.saveUserMessage(
+                        message,
+                        chatRoomID,
+                      );
+                      setState(() {
+                        _existingChatRoomID = chatRoomID;
+                        _messageStream = _chatService.getMessages(
+                          chatRoomID,
+                        );
+                        _isAwaitingResponse = true;
+                      });
+                      result = await _chatService.sendMessage(
+                        message,
+                        isFirstMessage: true,
+                        existingChatRoomID: chatRoomID,
+                      );
+                    } else {
+                      await _chatService.saveUserMessage(
+                        message,
+                        _existingChatRoomID,
+                      );
+                      setState(() {
+                        _messageStream = _chatService.getMessages(
+                          _existingChatRoomID,
+                        );
+                        _isAwaitingResponse = true;
+                      });
+                      result = await _chatService.sendMessage(
+                        message,
+                        existingChatRoomID: _existingChatRoomID,
+                      );
+                    }
 
-                            setState(() {
-                              _warning = result['warning'];
-                              _messageStream = _chatService.getMessages(
-                                _existingChatRoomID,
-                              );
+                    setState(() {
+                      _warning = result['warning'];
+                      _messageStream = _chatService.getMessages(
+                        _existingChatRoomID,
+                      );
 
-                              if (_warning == 'urgent') {
-                                _hasShownUrgentDialog = false;
-                              }
+                      if (_warning == 'urgent') {
+                        _hasShownUrgentDialog = false;
+                      }
 
-                              _isAwaitingResponse = false;
-                            });
-                          },
+                      _isAwaitingResponse = false;
+                    });
+                  },
                 ),
               ),
             ],

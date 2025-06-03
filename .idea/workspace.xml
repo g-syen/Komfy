@@ -10,40 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a18df75d-920d-4b8e-af7f-c9f18fb0dec9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/ui/complete_profile.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/profile/services/profile_services.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/change_password.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/edit_profile_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/faq_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/komfy_badge_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/profile_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/profile/ui/settings_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/models/user_data.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/services/encryption_services.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/services/komfy_badge.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/alert_dialog.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/shared/widgets/dropdown.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/komfy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/komfy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/navigation/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/navigation/app_router.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/auth/services/encryption_service.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/auth/ui/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/auth/ui/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/auth/ui/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/auth/ui/register_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/kommate/model/message_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/model/message_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/kommate/services/chat_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/services/chat_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/kommate/services/encryption_services.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/kommate/services/geminiai_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/services/geminiai_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/komfess/ui/mood_story_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/komfess/ui/mood_story_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/kommate/ui/kommate_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/kommate/ui/kommate_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/profile.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lib/features/auth/services/encryption_service.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared/widgets/custom_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/widgets/custom_button.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shared/widgets/navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/widgets/navbar.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shared/widgets/number_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/widgets/number_list.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
@@ -100,6 +78,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -131,29 +114,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Flutter.main.dart.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Cindy",
-    "ignore.virus.scanning.warn.message": "true",
-    "io.flutter.reload.alreadyRun": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ASUS/AndroidStudioProjects/Komfy/lib/features/profile/ui",
-    "project.structure.last.edited": "Variables",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#2 on Cindy&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ASUS/AndroidStudioProjects/Komfy/lib/features/profile/ui&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Variables&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ASUS\AndroidStudioProjects\Komfy\lib\features\profile\ui" />

@@ -1,6 +1,11 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
+import 'package:intl/intl.dart';
 import 'package:komfy/core/navigation/app_router.dart';
 import 'package:komfy/main.dart';
 import 'package:komfy/themes/typography.dart';
@@ -47,6 +52,65 @@ class NavBarState extends State<NavBar> {
   void initState() {
     super.initState();
     _currentIndex = widget.initialIndex;
+    _updateDate();
+  }
+
+
+  Future<void> _updateDate() async {
+    final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+    log('current user: $currentUserId');
+    final docRef = FirebaseFirestore.instance.collection('Users').doc(currentUserId);
+    log('docRef = $docRef');
+    try {
+      final userData = await docRef.get();
+      log('userData: $userData');
+      if(userData.exists) {
+        int hariPemakaian = userData['hariPemakaian'];
+        log('Hari pake: $hariPemakaian');
+        Timestamp lastCheckedIn;
+        if (userData.data()!.containsKey('lastCheckedIn')) {
+          if (userData['lastCheckedIn'] is Timestamp) {
+            lastCheckedIn = userData['lastCheckedIn'] as Timestamp;
+          } else {
+            log('Warning: Field "lastCheckedIn" exists but is not a Timestamp. Found: ${userData['lastCheckedIn']}. Defaulting to Timestamp.now().');
+            lastCheckedIn = Timestamp.now();
+          }
+        } else {
+          if (userData == null) {
+            log('Info: userData.data() returned null (document might be empty or an issue). Defaulting "lastCheckedIn" to Timestamp.now().');
+          } else {
+            log('Info: Field "lastCheckedIn" does not exist in the document. Defaulting to Timestamp.now().');
+          }
+          lastCheckedIn = Timestamp.now();
+        }
+        log('lastCheckedIn: $lastCheckedIn');
+        DateTime checkIn = lastCheckedIn.toDate();
+        String formattedDate = DateFormat('dd/MM/yyyy').format(checkIn);
+        DateTime yesterday = DateTime.now().subtract(Duration(days: 1));
+        DateTime twoDaysAgo = DateTime.now().subtract(Duration(days: 2));
+        String formattedNow = DateFormat('dd/MM/yyyy').format(DateTime.now());
+        String formattedYesterday = DateFormat('dd/MM/yyyy').format(yesterday);
+        String formattedTwoDaysAgo = DateFormat('dd/MM/yyyy').format(twoDaysAgo);
+        log('Dates: $formattedDate, $formattedNow, $formattedYesterday, $formattedTwoDaysAgo');
+        bool isYesterday = formattedDate == formattedYesterday;
+        bool isTwoDaysAgo = formattedDate == formattedTwoDaysAgo;
+        bool isToday = formattedDate == formattedNow;
+        Map<String, dynamic> data = {};
+        if(isYesterday || isToday || isTwoDaysAgo) {
+          data = {
+            'hariPemakaian' : hariPemakaian
+          };
+        } else {
+          data = {
+            'hariPemakaian' : 0
+          };
+        }
+        log('data: $data');
+        docRef.update(data);
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
   }
 
   Widget _getWidgetFromRoute(String routeName, BuildContext context) {
