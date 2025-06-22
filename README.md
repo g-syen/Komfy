@@ -16,7 +16,7 @@ Aplikasi ini dirancang untuk membantu mahasiswa FILKOM UB dalam menjaga kesehata
 | 📊 **Mood Tracker** | Pengguna dapat mencatat suasana hati harian untuk refleksi dan analisis. |
 | 📚 **Konten Edukatif** | Konten kesehatan mental yang valid dan mudah dipahami. |
 | 🚨 **Jalur Eskalasi ke ULTKSP** | Akses langsung ke pihak kampus jika diperlukan bantuan lanjutan. |
-| 🔔 **Notifikasi Pengingat** | Notifikasi harian untuk mengisi mood tracker atau membaca artikel. |
+| 📛 **Komfy Badge** | Level up dan dapatkan Komfy Badge dengan menggunakan aplikasi setiap hari. |
 
 ---
 
@@ -56,12 +56,12 @@ Aplikasi ini dikembangkan dengan fokus pada:
 - [x] Design Thinking
 - [x] UI Designing
 - [x] Setup proyek Flutter & Firebase
-- [ ] Integrasi Chatbot AI
-- [ ] Desain & implementasi mood tracker
-- [ ] Penulisan & review konten artikel edukatif
-- [ ] Sistem notifikasi
-- [ ] Penambahan fitur eskalasi otomatis ke ULTKSP
-- [ ] Penyesuaian UI/UX hasil beta testing
+- [x] Integrasi Chatbot AI
+- [x] Desain & implementasi mood tracker
+- [x] Penulisan & review konten artikel edukatif
+- [x] Sistem Komfy Badge
+- [x] Penambahan fitur eskalasi otomatis ke ULTKSP
+- [x] Penyesuaian UI/UX hasil beta testing
 
 ---
 
