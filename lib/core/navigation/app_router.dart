@@ -1,50 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:komfy/features/auth/ui/complete_profile.dart';
 import 'package:komfy/features/profile/ui/komfy_badge_screen.dart';
+import 'package:komfy/features/komynfo/ui/article_content_screen.dart';
+import 'package:komfy/features/komynfo/ui/video_content_screen.dart';
 import 'package:komfy/features/onboarding/onboarding_screen.dart';
-<<<<<<< Updated upstream
-=======
 import 'package:komfy/features/profile/ui/faq_screen.dart';
 import 'package:komfy/shared/widgets/navbar.dart';
->>>>>>> Stashed changes
 import 'package:komfy/features/auth/ui/login_screen.dart';
 import 'package:komfy/features/auth/ui/register_screen.dart';
 import 'package:komfy/features/home/home_screen.dart';
 import 'package:komfy/features/kommate/ui/kommate_screen.dart';
-<<<<<<< Updated upstream
-
-Map<String, WidgetBuilder> appRoutes = {
-=======
-import 'package:komfy/features/moodtracker/mood_recap_screen.dart';
-import 'package:komfy/features/moodtracker/mood_input_screen.dart';
-import 'package:komfy/features/moodtracker/mood_input_screen2.dart';
-import 'package:komfy/features/moodtracker/mood_input_screen3.dart';
-import 'package:komfy/features/moodtracker/mood_story_screen.dart';
-import 'package:komfy/features/moodtracker/model/mood_session_model.dart';
-import 'package:komfy/features/profile/ui/profile_screen.dart';
-
+import 'package:komfy/features/komfess/ui/mood_recap_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen2.dart';
+import 'package:komfy/features/komfess/ui/mood_input_screen3.dart';
+import 'package:komfy/features/komfess/ui/mood_story_screen.dart';
+import 'package:komfy/features/komfess/model/mood_session_model.dart';
+import 'package:komfy/shared/widgets/komynfo_navbar.dart';
+import 'package:komfy/features/komynfo/ui/komynfo_screen.dart';
+import 'package:komfy/features/komynfo/ui/article_detail_screen.dart';
+import 'package:komfy/features/komynfo/ui/video_detail_screen.dart';
+import 'package:komfy/features/komfess/ui/mood_detail_screen.dart';
 import '../../features/profile/ui/change_password.dart';
 import '../../features/profile/ui/edit_profile_screen.dart';
+import '../../features/profile/ui/profile_screen.dart';
 import '../../features/profile/ui/settings_screen.dart';
 
 Map<String, WidgetBuilder> appRoutes = {
   '/onboarding': (context) => OnBoardingScreen(),
-  '/login': (context) => const LoginScreen(),
-  '/register': (context) => const RegisterScreen(),
-  '/complete_profile': (context) => const CompleteProfileScreen(),
->>>>>>> Stashed changes
-  // '/forgetpassword': (context) => ForgetpasswordScreen(),
-  '/kommate': (context) => KommateScreen(),
-<<<<<<< Updated upstream
-  '/register': (context) => const RegisterScreen(),
-  '/onboarding': (context) => const OnBoardingScreen(),
-  '/login': (context) => const LoginScreen(),
-  '/home': (context) => const HomeScreen(),
-};
-=======
-  '/komfess': (context) => const MoodRecapScreen(),
   '/navbar': (context) => const NavBar(),
+  '/login': (context) => const LoginScreen(),
+  '/register': (context) => const RegisterScreen(),
+    // '/forgetpassword': (context) => ForgetpasswordScreen(),
+  '/home': (context) => const HomeScreen(),
+  '/kommate': (context) => KommateScreen(),
+  '/komfess': (context) => const MoodRecapScreen(),
   '/mood_input': (context) => MoodInputScreen(),
+  '/komynfo_navbar': (context) => const KomynfoNavbar(),
+  '/komynfo': (context) => KomynfoScreen(),
+  '/komynfo_article': (context) => ArticleContentScreen(),
+  '/komynfo_video': (context) => VideoContentScreen(),
+  '/complete_profile': (context) => CompleteProfileScreen(),
   '/profile': (context) => const ProfileScreen(),
   '/settings': (context) => SettingsScreen(),
   '/change_password': (context) => ChangePasswordScreen(),
@@ -91,6 +87,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           currentStep: currentStep,
         ),
       );
+    case '/mood_detail':
+      final documentId = settings.arguments as String;
+      return MaterialPageRoute(
+        builder: (_) => MoodDetailScreen(documentId: documentId),
+      );
+    case '/articleDetail':
+      return MaterialPageRoute(
+        builder: (_) => const ArticleDetailScreen(),
+        settings: settings,
+      );
+    case '/videoDetail':
+      return MaterialPageRoute(
+        builder: (_) => const VideoDetailScreen(),
+        settings: settings,
+      );
     default:
       if (appRoutes.containsKey(settings.name)) {
         return MaterialPageRoute(builder: appRoutes[settings.name]!);
@@ -102,4 +113,3 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
   }
 }
->>>>>>> Stashed changes

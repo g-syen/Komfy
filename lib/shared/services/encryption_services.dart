@@ -239,78 +239,6 @@ RSAPublicKey? deserializePublicKeyFromJsonBase64(String base64Content) {
   }
 }
 
-String serializePublicKeyCustom(RSAPublicKey publicKey) {
-  final keyMap = {
-    'modulus': publicKey.modulus.toString(),
-    'exponent': publicKey.exponent.toString(),
-  };
-  final jsonStr = jsonEncode(keyMap);
-  final base64Encoded = base64Encode(utf8.encode(jsonStr));
-
-  // Add header, footer, and line breaks for 64-character width
-  String pemContent = "-----BEGIN PUBLIC KEY-----\n";
-  for (var i = 0; i < base64Encoded.length; i += 64) {
-    pemContent += "${base64Encoded.substring(i, i + 64 > base64Encoded.length ? base64Encoded.length : i + 64)}\n";
-  }
-  pemContent += "-----END PUBLIC KEY-----";
-  return pemContent;
-}
-
-RSAPublicKey? deserializePublicKeyCustom(String pemString) {
-  final lines = pemString.trim().split('\n');
-  if (lines.length < 3 ||
-      !lines.first.startsWith('-----BEGIN PUBLIC KEY-----') ||
-      !lines.last.startsWith('-----END PUBLIC KEY-----')) {
-    // Basic validation failed
-    print("Invalid custom PEM format");
-    return null;
-  }
-
-  // Remove header and footer
-  final base64Content = lines.sublist(1, lines.length - 1).join('');
-
-  try {
-    final jsonStr = utf8.decode(base64Decode(base64Content));
-    final keyMap = jsonDecode(jsonStr) as Map<String, dynamic>;
-
-    final modulus = BigInt.tryParse(keyMap['modulus'] as String);
-    final exponent = BigInt.tryParse(keyMap['exponent'] as String);
-
-    if (modulus != null && exponent != null) {
-      // Assuming you have a constructor for RSAPublicKey like this:
-      // RSAPublicKey(this.modulus, this.exponent);
-      // Replace with your actual RSAPublicKey class instantiation
-      return RSAPublicKey(modulus, exponent);
-    } else {
-      print("Failed to parse modulus or exponent from JSON");
-      return null;
-    }
-  } catch (e) {
-    print("Error deserializing custom PEM: $e");
-    return null;
-  }
-}
-
-Uint8List serializePublicKey(RSAPublicKey publicKey) {
-  final keyMap = {
-    'modulus': publicKey.modulus.toString(),
-    'exponent': publicKey.exponent.toString(),
-  };
-
-  final jsonStr = jsonEncode(keyMap);
-  return Uint8List.fromList(utf8.encode(jsonStr));
-}
-
-RSAPublicKey deserializePublicKey(Uint8List data) {
-  final jsonStr = utf8.decode(data);
-  final keyMap = jsonDecode(jsonStr);
-
-  final modulus = BigInt.parse(keyMap['modulus']);
-  final exponent = BigInt.parse(keyMap['exponent']);
-
-  return RSAPublicKey(modulus, exponent);
-}
-
 RSAPrivateKey deserializePrivateKey(Uint8List data) {
   final jsonStr = utf8.decode(data);
   final keyMap = jsonDecode(jsonStr);
@@ -342,26 +270,6 @@ Uint8List aesGcmDecrypt(Uint8List key, Uint8List ciphertext, Uint8List iv, Uint8
 
   return cipher.process(ciphertext);
 }
-
-// String encodePublicKeyToPem(RSAPublicKey publicKey) {
-//   // Create the ASN.1 sequence for RSAPublicKey (modulus, exponent) - this is PKCS#1 format
-//   final pkcs1PublicKey = ASN1Sequence();
-//   pkcs1PublicKey.add(ASN1Integer(publicKey.modulus!));
-//   pkcs1PublicKey.add(ASN1Integer(publicKey.exponent!));
-//
-//   // Create the SubjectPublicKeyInfo structure (X.509 format)
-//   // It contains an AlgorithmIdentifier and the public key as a BIT STRING.
-//   // The BIT STRING, in turn, contains the DER-encoded PKCS#1 RSAPublicKey.
-//   final topLevelSeq = SubjectPublicKeyInfo(
-//       AlgorithmIdentifier(PKCS1ObjectIdentifiers.rsaEncryption, ASN1Null()), // Algorithm: RSA
-//       ASN1BitString(stringValues: pkcs1PublicKey.encodedBytes) // Public key data
-//   );
-//
-//   // Encode the SubjectPublicKeyInfo object to PEM format.
-//   // The PEMEncoder with label 'PUBLIC KEY' handles SPKI structures.
-//   final pemData = PEMEncoder(label: 'PUBLIC KEY').encode(topLevelSeq);
-//   return pemData;
-// }
 
 Future<List<dynamic>> generateUserKeyPairs(String currentUserID, String password) async {
   // Generations: Key Pairs, Salt, Derived Symmetric Key, and Initialization Vector (IV)
@@ -402,12 +310,6 @@ Future<void> getPrivateKeyFromFirestore(String currentUserID, String password) a
   return;
 }
 
-Future<bool?> doesPrivateKeyExist() async {
-  final secureStorage = FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true));
-  String? privateKey = await secureStorage.read(key: 'privateKey');
-  return (privateKey?.isNotEmpty);
-}
-
 // --- NEW Encryption (Single Block, SHA-256 using correct factory) ---
 String rsaEncryptSingleBlock(String plaintext, RSAPublicKey publicKey, [Uint8List? encodingParams]) {
   final data = Uint8List.fromList(utf8.encode(plaintext));
@@ -444,43 +346,6 @@ Future<String> rsaDecryptSingleBlock(String encryptedBase64, [Uint8List? encodin
   }
 
   final decryptedBytes = decryptor.process(encryptedBytes);
-  return utf8.decode(decryptedBytes);
-}
-
-Uint8List _processInBlocks(AsymmetricBlockCipher engine, Uint8List input) {
-  final numBlocks = (input.length / engine.inputBlockSize).ceil();
-  final output = <int>[];
-
-  for (var i = 0; i < numBlocks; i++) {
-    final start = i * engine.inputBlockSize;
-    final end = (start + engine.inputBlockSize).clamp(0, input.length);
-    final chunk = input.sublist(start, end);
-
-    output.addAll(engine.process(chunk));
-  }
-
-  return Uint8List.fromList(output);
-}
-
-String rsaEncryptString(String plaintext, RSAPublicKey publicKey) {
-  final data = Uint8List.fromList(utf8.encode(plaintext));
-
-  final encryptor = OAEPEncoding(RSAEngine())
-    ..init(true, PublicKeyParameter<RSAPublicKey>(publicKey));
-
-  final encryptedMessage = _processInBlocks(encryptor, data);
-  final encoded64String = base64Encode(encryptedMessage);
-  return encoded64String;
-}
-
-Future<String> rsaDecryptToString(String encryptedData) async {
-  final decoded64String = base64Decode(encryptedData);
-  final privateKey = await _getPrivateKeyFromSecureStorage();
-  final allKeys = await FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true)).readAll();
-  final decryptor = OAEPEncoding(RSAEngine())
-    ..init(false, PrivateKeyParameter<RSAPrivateKey>(privateKey));
-
-  final decryptedBytes = _processInBlocks(decryptor, decoded64String);
   return utf8.decode(decryptedBytes);
 }
 
