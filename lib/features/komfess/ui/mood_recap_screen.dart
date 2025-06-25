@@ -149,11 +149,11 @@ class MoodRecapScreen extends StatelessWidget {
             }
 
             final docs = snapshot.data?.docs ?? [];
-            if (docs.isEmpty) {
-              // This part is correct, show 'No entries' if the list is empty
-              return const Center(child: Text('No mood entries yet.'));
-            }
-            final hasData = docs.isNotEmpty;
+            // if (docs.isEmpty) {
+            //   // This part is correct, show 'No entries' if the list is empty
+            //   return const Center(child: Text('No mood entries yet.'));
+            // }
+            // final hasData = docs.isNotEmpty;
 
             // --- DECRYPTION LOGIC ---
             // 1. Create a list of all the decryption tasks (Futures).
@@ -195,6 +195,8 @@ class MoodRecapScreen extends StatelessWidget {
                         : DateTime.now(),
                   };
                 }).toList();
+
+                final hasData = moodData.isNotEmpty;
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),

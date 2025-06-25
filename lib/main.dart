@@ -6,7 +6,6 @@ import 'package:komfy/themes/light_mode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:komfy/core/navigation/app_router.dart';
-import 'package:komfy/shared/screens/splash_screen.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final ValueNotifier<bool> drawerStateNotifier = ValueNotifier<bool>(false);

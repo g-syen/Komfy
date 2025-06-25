@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:komfy/shared/widgets/alert_dialog.dart';
@@ -147,14 +146,14 @@ class _ChangePasswordState extends State<ChangePasswordScreen> {
           )
           );
         });
-        print("Password updated successfully.");
+        log("Password updated successfully.");
         setState(() {
           _isLoading = false;
           _error = null;
         });
         return;
       } else {
-        print("No user is currently signed in.");
+        log("No user is currently signed in.");
         setState(() {
           _isLoading = false;
           _error = 'User tidak ditemukan';
@@ -163,14 +162,14 @@ class _ChangePasswordState extends State<ChangePasswordScreen> {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
-        print('The user must reauthenticate before this operation can be executed.');
+        log('The user must reauthenticate before this operation can be executed.');
         setState(() {
           _isLoading = false;
           _error = 'User tidak berhasil autentikasi ulang';
         });
         return;
       } else {
-        print('Password change error: ${e.message}');
+        log('Password change error: ${e.message}');
         setState(() {
           _isLoading = false;
           _error = 'Ubah kata sandi tidak berhasil: ${e.message}';

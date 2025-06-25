@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../shared/icons/my_icons.dart';
-import '../../../shared/widgets/custom_button.dart';
 import '../../../shared/widgets/number_list.dart';
 import '../../../themes/typography.dart';
 
@@ -25,7 +24,6 @@ class _FaqScreenState extends State<FaqScreen> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         leading: Padding(

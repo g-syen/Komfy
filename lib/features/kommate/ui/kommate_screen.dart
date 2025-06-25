@@ -32,7 +32,7 @@ class _KommateScreenState extends State<KommateScreen> {
   final Map<String, Future<String>> _decryptionCache = {};
   Stream<QuerySnapshot>? _messageStream;
   late StreamController<List<Message>> _tempMessageStream;
-  List<Message> _tempMessages = [];
+  final List<Message> _tempMessages = [];
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final ChatService _chatService = ChatService();
@@ -49,7 +49,6 @@ class _KommateScreenState extends State<KommateScreen> {
   String topic = '';
   String _selectedDate = '';
   String _warning = '';
-  String _error = '';
   String _existingChatRoomID = '';
   bool _isAwaitingResponse = false;
   bool _hasShownUrgentDialog = false;

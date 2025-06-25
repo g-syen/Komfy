@@ -8,7 +8,6 @@ import 'dart:convert';
 import 'package:argon2/argon2.dart' as argon;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/services.dart';
-import 'package:asn1lib/asn1lib.dart';
 
 class ServerHybridEncryptedPayload {
   final Uint8List rsaEncryptedAesKey;
@@ -29,7 +28,7 @@ class ServerHybridEncryptedPayload {
       final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
       return ServerHybridEncryptedPayload.fromMap(jsonMap); // Delegate to fromMap
     } catch (e) {
-      print('Error in ServerHybridEncryptedPayload.fromJsonString: $e');
+      ('Error in ServerHybridEncryptedPayload.fromJsonString: $e');
       throw FormatException('Invalid JSON string for hybrid payload: ${e.toString()}');
     }
   }

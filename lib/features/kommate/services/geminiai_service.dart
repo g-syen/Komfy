@@ -81,7 +81,7 @@ y2E8UvO4ApI0RGG60VDDGx8CAwEAAQ==
       try {
         encryptedPayloadMap = fullGeminiResponseMap['candidates'][0]['content']['parts'][0]['text'];
       } catch (e) {
-        print("Error extracting encrypted payload from Gemini response: $e");
+        log("Error extracting encrypted payload from Gemini response: $e");
         throw Exception(e);
       }
       final fullText = await decryptHybridResponseFromServer(encryptedPayloadMap);

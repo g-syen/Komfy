@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +108,7 @@ class NavBarState extends State<NavBar> {
         docRef.update(data);
       }
     } catch (e) {
-      print("Error: $e");
+      log("Error: $e");
     }
   }
 

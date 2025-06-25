@@ -486,7 +486,6 @@ class _KomfyBadgeScreenState extends State<KomfyBadgeScreen> {
   }
 
   Widget _buildKomfyBadgeTiers() {
-    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Column(
@@ -803,8 +802,7 @@ class _KomfyBadgeScreenState extends State<KomfyBadgeScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     final Color baseColor = Colors.grey.shade300;
-    final Color highlightColor = Colors.grey.shade100;
-    final Color skeletonTextColor = Colors.grey.shade400; // For text-like placeholders
+    final Color highlightColor = Colors.grey.shade100;// For text-like placeholders
 
     Widget skeletonContainer(double? width, double height, {double borderRadius = 4.0, EdgeInsetsGeometry? margin, BoxShape shape = BoxShape.rectangle}) {
       return Container(

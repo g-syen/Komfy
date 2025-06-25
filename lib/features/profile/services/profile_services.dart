@@ -28,7 +28,7 @@ class ProfileServices extends StatelessWidget {
         'photoProfile': base64Image,
       });
     } else {
-      print('No image selected.');
+      log('No image selected.');
     }
   }
 

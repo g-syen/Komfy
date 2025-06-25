@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class _ProfileState extends State<EditProfileScreen> {
   bool userInfoExists = false;
   bool _isLoading = true;
   String? _error;
-  Map<String, TextEditingController> _controllers = {};
+  final Map<String, TextEditingController> _controllers = {};
 
   void _checkProfilePicture() async {
     final image = await _profileImageFuture;
@@ -157,7 +156,7 @@ class _ProfileState extends State<EditProfileScreen> {
           );
         },
       );
-      print("Profile updated successfully.");
+      log("Profile updated successfully.");
       setState(() {
         _isLoading = false;
         _error = null;
